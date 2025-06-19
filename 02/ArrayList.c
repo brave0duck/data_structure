@@ -24,7 +24,7 @@ int getListLength(ArrayList *p);
 int removeListData(ArrayList* p, int position);
 void clearList(ArrayList* p);
 void deleteList(ArrayList* p);
-int Menu(void);
+
 
 int main(void){
     ArrayList * pList;
@@ -34,19 +34,36 @@ int main(void){
     for(int i=1; i<=8 ; i++){
         addListData(pList,i,i*10);
     }
-    getListData(pList, 5);
-    getListData(pList, 1);
+    printf("getListData(pList, 5) == %d\n", getListData(pList, 5));
+    printf("getListData(pList, 1) == %d\n", getListData(pList, 1));
 
-    getListLength(pList);
+    printf("getListLength(pList) == %d\n", getListLength(pList));
 
-    removeListData(pList, 5);
+    for(int i=0; i< (pList->current -1); i++)
+        printf("[%d]\t", pList->pData[i].data);
+
+    printf("\n now. after removeListData(pList,1 ) operation \n");
+    removeListData(pList, 1);
+    for(int i=0; i< (pList->current -1); i++)
+        printf("[%d]\t", pList->pData[i].data);
+    printf("\n");
+
+    printf("\n now. after removeListData(pList, 6) operation \n");
+    removeListData(pList, 6);
+    for(int i=0; i< (pList->current -1); i++)
+        printf("[%d]\t", pList->pData[i].data);
+    printf("\n");
+    
+    printf("\n now. after removeListData(pList, 2) operation \n");
     removeListData(pList, 2);
-    removeListData(pList, 8);
+    for(int i=0; i< (pList->current -1); i++)
+        printf("[%d]\t", pList->pData[i].data);
+    printf("\n");
 
     clearList(pList);
 
     deleteList(pList);
-
+    
     return 0;
 }
 // 배열이동 함수
@@ -83,7 +100,7 @@ int addListData(ArrayList *p, int position, int data){
     }
     else{       
         p->pData[position-1].data = data;        // 끼우려는 위치가 전체숫자보다 크면 0리턴
-        
+        p->current++;
     }
     return 1;
 }
@@ -96,11 +113,14 @@ int getListLength(ArrayList *p){
     return p->current;
 }
 int removeListData(ArrayList* p, int position){
-    if(position > p->current)
+    if(position > p->current){
+        printf("Wrong position.. there is no Node\n");
         return 0;
+    }
+
     shiftList(p->pData, p->current-1, position-1);
     p->pData[p->current-1].data = 0;
-
+    p->current--;
     return 1;
 }
 void clearList(ArrayList* p){
@@ -109,14 +129,14 @@ void clearList(ArrayList* p){
     }
     p->current=0;
     p->max_count=0;
+    printf("\n clearList...\n");
     
 }
 void deleteList(ArrayList* p){
-    while(p){
-        free(p->pData);
-        p->pData = NULL;
-    }
+    
+    free(p->pData);
+    p->pData = NULL;
     free(p);
     p=NULL;
-    
+    printf("\n deleteList...\n");
 }
