@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #define _MAX_ 10
 
 // 노드 타입
@@ -34,6 +33,8 @@ int main(void){
     for(int i=1; i<=8 ; i++){
         addListData(pList,i,i*10);
     }
+    addListData(pList,1,49);
+
     printf("getListData(pList, 5) == %d\n", getListData(pList, 5));
     printf("getListData(pList, 1) == %d\n", getListData(pList, 1));
 
@@ -66,20 +67,16 @@ int main(void){
     
     return 0;
 }
-// 배열이동 함수
+// 배열이동 함수. 추가시 오른쪽이동, 삭제시 왼쪽이동 
 int shiftList(ArrayListNode* p, int a, int b){
     
-    if(a > b){  // 배열 왼쪽 이동
-        for(int i=b; i<= a; i++){
+    if(a > b){  // 배열 왼쪽 이동. 예) 6,2 = 6번째부터 2번째까지 왼쪽으로 이동. 처음부터 끝으로 이동하면서
+        for(int i=b; i<= a; i++)
             p[i] = p[i+1];
-        }
-    
     }
-    else{   // 배열 오른쪽 이동
-        for(int i=b; i<= a; i--){
+    else{   // 배열 오른쪽 이동. 예) 2,5 = 2번째 부터 5번째까지 오른쪽으로 이동. 끝부터 처음으로 이동하면서
+        for(int i=b; i<= a; i--)
             p[i+1] = p[i];
-        }
-    
     }
 }
 // 리스트* 생성(갯수)
@@ -99,9 +96,10 @@ int addListData(ArrayList *p, int position, int data){
 
     }
     else{       
-        p->pData[position-1].data = data;        // 끼우려는 위치가 전체숫자보다 크면 0리턴
-        p->current++;
+        p->pData[position-1].data = data;        // 끼우려는 위치가 전체숫자보다 크면 마지막에 추가
+        
     }
+    p->current++;       // current count +1
     return 1;
 }
 int getListData(ArrayList* p, int position){
@@ -120,7 +118,7 @@ int removeListData(ArrayList* p, int position){
 
     shiftList(p->pData, p->current-1, position-1);
     p->pData[p->current-1].data = 0;
-    p->current--;
+    p->current--;       // current count -1
     return 1;
 }
 void clearList(ArrayList* p){
