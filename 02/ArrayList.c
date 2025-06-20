@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define _MAX_ 10
+#define _MAX_ 5
 
 // 노드 타입
 typedef struct ArrayListNodeType{
@@ -27,39 +27,48 @@ void deleteList(ArrayList* p);
 
 int main(void){
     ArrayList * pList;
-    
+    int count;
     pList = createList(_MAX_);
 
-    for(int i=1; i<=8 ; i++){
-        addListData(pList,i,i*10);
-    }
-    addListData(pList,1,49);
+    addListData(pList,0,10);
+    addListData(pList,1,20);
+    addListData(pList,1,30);
 
-    printf("getListData(pList, 5) == %d\n", getListData(pList, 5));
-    printf("getListData(pList, 1) == %d\n", getListData(pList, 1));
-
-    printf("getListLength(pList) == %d\n", getListLength(pList));
-
-    for(int i=0; i< (pList->current -1); i++)
-        printf("[%d]\t", pList->pData[i].data);
-
-    printf("\n now. after removeListData(pList,1 ) operation \n");
-    removeListData(pList, 1);
-    for(int i=0; i< (pList->current -1); i++)
-        printf("[%d]\t", pList->pData[i].data);
-    printf("\n");
-
-    printf("\n now. after removeListData(pList, 6) operation \n");
-    removeListData(pList, 6);
-    for(int i=0; i< (pList->current -1); i++)
-        printf("[%d]\t", pList->pData[i].data);
-    printf("\n");
+    count = getListLength(pList);
+    printf("getListLength() is %d", count);
     
-    printf("\n now. after removeListData(pList, 2) operation \n");
-    removeListData(pList, 2);
-    for(int i=0; i< (pList->current -1); i++)
-        printf("[%d]\t", pList->pData[i].data);
-    printf("\n");
+    // for(int i=1; i<=8 ; i++){
+    //     addListData(pList,i,i*10);
+    // }
+    // addListData(pList,1,49);
+
+    
+    
+    // printf("getListData(pList, 5) == %d\n", getListData(pList, 5));
+    // printf("getListData(pList, 1) == %d\n", getListData(pList, 1));
+
+    // printf("getListLength(pList) == %d\n", getListLength(pList));
+
+    // for(int i=0; i< (pList->current -1); i++)
+    //     printf("[%d]\t", pList->pData[i].data);
+
+    // printf("\n now. after removeListData(pList,1 ) operation \n");
+    // removeListData(pList, 1);
+    // for(int i=0; i< (pList->current -1); i++)
+    //     printf("[%d]\t", pList->pData[i].data);
+    // printf("\n");
+
+    // printf("\n now. after removeListData(pList, 6) operation \n");
+    // removeListData(pList, 6);
+    // for(int i=0; i< (pList->current -1); i++)
+    //     printf("[%d]\t", pList->pData[i].data);
+    // printf("\n");
+    
+    // printf("\n now. after removeListData(pList, 2) operation \n");
+    // removeListData(pList, 2);
+    // for(int i=0; i< (pList->current -1); i++)
+    //     printf("[%d]\t", pList->pData[i].data);
+    // printf("\n");
 
     clearList(pList);
 
