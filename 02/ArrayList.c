@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define _MAX_ 5
+
 
 // 노드 타입
 typedef struct ArrayListNodeType{
@@ -28,7 +28,7 @@ void deleteList(ArrayList* p);
 int main(void){
     ArrayList * pList;
     int count;
-    pList = createList(_MAX_);
+    pList = createList(5);
 
     if(pList==NULL){
         printf("failed create... \n");
