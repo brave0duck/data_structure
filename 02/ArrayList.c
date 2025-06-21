@@ -30,17 +30,10 @@ int main(void){
     int count;
     pList = createList(_MAX_);
 
-    addListData(pList,0,10);
-    addListData(pList,1,20);
-    addListData(pList,1,30);
-
-    count = getListLength(pList);
-    printf("getListLength() is %d", count);
-    
-    // for(int i=1; i<=8 ; i++){
-    //     addListData(pList,i,i*10);
-    // }
-    // addListData(pList,1,49);
+    for(int i=1; i<=8 ; i++){
+        addListData(pList,i,i*10);
+    }
+    addListData(pList,1,49);
 
     
     
@@ -79,17 +72,19 @@ int main(void){
 // 배열이동 함수. 추가시 오른쪽이동, 삭제시 왼쪽이동 
 int shiftList(ArrayListNode* p, int a, int b){
     
-    if(a > b){  // 배열 왼쪽 이동. 예) 6,2 = 6번째부터 2번째까지 왼쪽으로 이동. 처음부터 끝으로 이동하면서
-        for(int i=b; i<= a; i++)
+    if(a > b){  // 삭제연산. 배열 왼쪽이동. 예) 6,2 = 6번째부터 2번째까지 왼쪽으로 이동
+        for(int i=b; i< a; i++)
             p[i] = p[i+1];
     }
-    else{   // 배열 오른쪽 이동. 예) 2,5 = 2번째 부터 5번째까지 오른쪽으로 이동. 끝부터 처음으로 이동하면서
-        for(int i=b; i<= a; i--)
+    else{   // (a <b) 추가연산. 배열 오른쪽이동. 예) 2,5 = 2번째 부터 5번째까지 오른쪽으로 이동
+        for(int i=b; i > a; i--)
             p[i+1] = p[i];
     }
 }
 // 리스트* 생성(갯수)
 ArrayList* createList(int count){
+    if(count <= 0 || count > _MAX_)
+        return NULL;
     ArrayList* p = (ArrayList*)malloc(sizeof(ArrayList));
     p->max_count = count;
     p->current = 0;
@@ -99,6 +94,10 @@ ArrayList* createList(int count){
 }
 
 int addListData(ArrayList *p, int position, int data){
+    if( p == NULL)
+        return 1;
+    if( 0 > position && position > p->current)  // position의 위치가 0미만 current값을 초과하게되면 잘못입력된것
+        return 2;               
     if( position < p->current){              // 중간에 끼어드면 . 데이터시프트 함수호출
         shiftList(p->pData, position-1, p->current-1);
         p->pData[position].data = data;
