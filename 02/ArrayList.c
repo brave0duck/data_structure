@@ -30,39 +30,19 @@ int main(void){
     int count;
     pList = createList(_MAX_);
 
-    for(int i=1; i<=8 ; i++){
-        addListData(pList,i,i*10);
+    if(pList==NULL){
+        printf("failed create... \n");
+        return 1;
     }
-    addListData(pList,1,49);
+        
+    addListData(pList,0,10);
+    addListData(pList,1,40);
+    addListData(pList,1,30);
+    addListData(pList,2,60);
 
-    
-    
-    // printf("getListData(pList, 5) == %d\n", getListData(pList, 5));
-    // printf("getListData(pList, 1) == %d\n", getListData(pList, 1));
-
-    // printf("getListLength(pList) == %d\n", getListLength(pList));
-
-    // for(int i=0; i< (pList->current -1); i++)
-    //     printf("[%d]\t", pList->pData[i].data);
-
-    // printf("\n now. after removeListData(pList,1 ) operation \n");
-    // removeListData(pList, 1);
-    // for(int i=0; i< (pList->current -1); i++)
-    //     printf("[%d]\t", pList->pData[i].data);
-    // printf("\n");
-
-    // printf("\n now. after removeListData(pList, 6) operation \n");
-    // removeListData(pList, 6);
-    // for(int i=0; i< (pList->current -1); i++)
-    //     printf("[%d]\t", pList->pData[i].data);
-    // printf("\n");
-    
-    // printf("\n now. after removeListData(pList, 2) operation \n");
-    // removeListData(pList, 2);
-    // for(int i=0; i< (pList->current -1); i++)
-    //     printf("[%d]\t", pList->pData[i].data);
-    // printf("\n");
-
+    count = getListLength(pList);
+    printf("getListLength() is %d", count);
+   
     clearList(pList);
 
     deleteList(pList);
@@ -96,17 +76,13 @@ ArrayList* createList(int count){
 int addListData(ArrayList *p, int position, int data){
     if( p == NULL)
         return 1;
-    if( 0 > position && position > p->current)  // position의 위치가 0미만 current값을 초과하게되면 잘못입력된것
-        return 2;               
-    if( position < p->current){              // 중간에 끼어드면 . 데이터시프트 함수호출
-        shiftList(p->pData, position-1, p->current-1);
-        p->pData[position].data = data;
-
-    }
-    else{       
-        p->pData[position-1].data = data;        // 끼우려는 위치가 전체숫자보다 크면 마지막에 추가
-        
-    }
+    // position의 위치가 0미만이거나 current값을 초과하면 잘못입력된 것
+    if( position < 0 || position > p->current || p->current >= p->max_count)
+        return 2;
+    if( position < p->current)              // 중간에 끼어들면 데이터 시프트 함수 호출
+        shiftList(p->pData, position, p->current-1);
+    
+    p->pData[position].data = data;        // 마지막에 추가
     p->current++;       // current count +1
     return 1;
 }
@@ -134,15 +110,17 @@ void clearList(ArrayList* p){
         p->pData[i].data = 0;
     }
     p->current=0;
-    p->max_count=0;
+    //p->max_count=0;
     printf("\n clearList...\n");
     
 }
 void deleteList(ArrayList* p){
+    if(p!=NULL){
+        if(p->pData[0].data != 0)
+            clearList(p);
+        free(p->pData);
+        free(p);
+    }
     
-    free(p->pData);
-    p->pData = NULL;
-    free(p);
-    p=NULL;
     printf("\n deleteList...\n");
 }
