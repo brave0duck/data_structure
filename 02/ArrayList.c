@@ -49,7 +49,7 @@ int main(void){
     
     return 0;
 }
-// 배열이동 함수. 추가시 오른쪽이동, 삭제시 왼쪽이동 
+// 배열이동 함수. 노드추가시 오른쪽이동, 삭제시 왼쪽이동 
 int shiftList(ArrayListNode* p, int a, int b){
     
     if(a > b){  // 삭제연산. 배열 왼쪽이동. 예) 6,2 = 6번째부터 2번째까지 왼쪽으로 이동
