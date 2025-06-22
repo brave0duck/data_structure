@@ -91,9 +91,10 @@ int getLen(linked_list* p){
 void printData(linked_list* p){
     node* pre = p->start_node.p;
     for(int i=1; i<= p->count;i++){
-        printf("[%d]-[%p]\t", pre->data, pre->p);
+        printf("[%d]-[%d]\t", i, pre->data);
         pre = pre->p;
     }
+    printf("node count : %d\n", p->count);
 
 }
 
