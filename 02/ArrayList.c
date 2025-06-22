@@ -63,7 +63,7 @@ int shiftList(ArrayListNode* p, int a, int b){
 }
 // 리스트* 생성(갯수)
 ArrayList* createList(int count){
-    if(count <= 0 || count > _MAX_)
+    if(count <= 0 || count > 5)
         return NULL;
     ArrayList* p = (ArrayList*)malloc(sizeof(ArrayList));
     p->max_count = count;

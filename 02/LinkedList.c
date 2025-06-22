@@ -14,7 +14,7 @@ typedef struct LinkedListType{
 
 LinkedList* createLinkedList();
 int getLinkedListData(LinkedList* pList, int position);
-LinkedListNode* getLinkedListPointer(LinkdedList* pList, int position);
+LinkedListNode* getLinkedListPointer(LinkedList* pList, int position);
 int main(void){
 
     return 0;
@@ -33,7 +33,7 @@ int getLinkedListData(LinkedList* pList, int position){
         pCurrentNode = pCurrentNode->pLink;
     return pCurrentNode->data;
 }
-LinkedListNode* getLinkedListPointer(LinkdedList* pList, int position){
+LinkedListNode* getLinkedListPointer(LinkedList* pList, int position){
     
     LinkedListNode* pCurrentNode = &(pList->headerNode);
 
