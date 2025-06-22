@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct ll_node{     //alias. linked list node = ll_node
+typedef struct ll_node{     // ll_node == linked list node
     int data;
     struct ll_node* p;
 }node;
@@ -26,20 +26,9 @@ int main(int argc, char* argv[]){
 
     pList = create();
     addData(pList,1,10);
-    printData(pList); printf("\n");
     addData(pList,2,20);
-    printData(pList);printf("\n");
     addData(pList,2,30);
-    addData(pList,4,40);
-    addData(pList,5,50);
-    addData(pList,6,60);
-    addData(pList,10,70);
-    printData(pList);printf("\n");
 
-    value = getData(pList,2);
-    printf("위치: %d, 값: %d\n", 2, value);
-
-    removeData(pList,1);
     printData(pList);
 
     deleteData(pList);
