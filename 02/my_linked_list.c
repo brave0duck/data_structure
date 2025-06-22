@@ -18,20 +18,52 @@ int addData(linked_list* p, int n, int data);
 int removeData(linked_list* p, int n);
 void deleteData(linked_list* p);
 int getLen(linked_list* p);
+int getLen2(linked_list* p);
 void printData(linked_list* p);
+void concatList(linked_list* a, linked_list* b);
 
 int main(int argc, char* argv[]){
-    linked_list * pList = NULL;
-    int value=0;
+    linked_list* a=NULL;
+    linked_list* b=NULL;
 
-    pList = create();
-    addData(pList,1,10);
-    addData(pList,2,20);
-    addData(pList,2,30);
+    a = create();
+    b = create();
 
-    printData(pList);
+    addData(a,1,10);
+    addData(a,2,20);
+    addData(a,3,30);
+    addData(b,1,40);
+    addData(b,2,50);
 
-    deleteData(pList);
+    printf("before concatate\n");
+    printf("[linked list a]\n");
+    printData(a);
+    printf("[linked list b]\n");
+    printData(b);
+
+    concatList(a,b);
+
+    printf("After concatate\n");
+    printf("[linked list a]\n");
+    printData(a);
+    printf("[linked list b]\n");
+    printData(b);
+
+    deleteData(a);
+    deleteData(b);
+
+
+    // linked_list * pList = NULL;
+    // int value=0;
+
+    // pList = create();
+    // addData(pList,1,10);
+    // addData(pList,2,20);
+    // addData(pList,2,30);
+
+    // printData(pList);
+
+    // deleteData(pList);
     
 
     return 0;
@@ -39,6 +71,19 @@ int main(int argc, char* argv[]){
 linked_list* create(void){
     linked_list* p  = (linked_list*)calloc(1,sizeof(linked_list));
     return p;
+}
+// concatate two linked list. 1. find end-point for a  2.link a and b
+void concatList(linked_list* a, linked_list* b){
+    node* p = a->start_node.p;
+    if(a != NULL && b != NULL){
+        while(p && p->p){
+            p = p->p;
+        }
+        p->p =  b->start_node.p;
+        a->count += b->count;
+        b->start_node.p = NULL;
+        b->count =0;
+    }
 }
 int getData(linked_list* p, int n){
     node * tmp = &(p->start_node);
@@ -77,13 +122,22 @@ int addData(linked_list* p, int n, int data){
 int getLen(linked_list* p){
     return p->count;
 }
+int getLen2(linked_list* p){
+    node* node = p->start_node.p;
+    int count=0;
+    while(node){
+        node = node->p;
+        count++;
+    }
+    return count;
+}
 void printData(linked_list* p){
     node* pre = p->start_node.p;
     for(int i=1; i<= p->count;i++){
-        printf("[%d]-[%d]\t", i, pre->data);
+        printf("[%d]-%d\n", i, pre->data);
         pre = pre->p;
     }
-    printf("node count : %d\n", p->count);
+    printf("node count : %d\n", getLen2(p));
 
 }
 
@@ -114,15 +168,19 @@ int removeData(linked_list* p, int n){
     return 1;
 }
 void deleteData(linked_list* p){
-    node* pre = p->start_node.p;    //pre = 첫째 노드 주소
-    node* next = pre->p;            //next == 첫째노드가 가리키는곳의 주소 == 둘째노드 주소
     
-    while(p->count--){
-        free(pre);          //첫째 삭제
-        if(next){           // 다음주소가 널이 아니라면 == 마지막이 아니라면
-            pre = next;     // 다음 삭제할 주소로 이동
-            next = next->p;
+    if(p->count > 0){                   // node가 하나라도 있을경우에만
+        node* pre = p->start_node.p;    //pre = 첫째 노드 주소만
+        node* next = pre->p;            //next == 첫째노드가 가리키는곳의 주소 == 둘째노드 주소
+        
+        while(p->count--){
+            free(pre);          //첫째 삭제
+            if(next){           // 다음주소가 널이 아니라면 == 마지막이 아니라면
+                pre = next;     // 다음 삭제할 주소로 이동
+                next = next->p;
+            }
         }
+
     }
     free(p);    //리스트본체도 삭제
     

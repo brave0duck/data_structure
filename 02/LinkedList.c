@@ -52,7 +52,7 @@ int addLinkedListData(LinkedList* pList, int position, int data){
         pNew->data = data;
         pNew->pLink = pAfter;
 
-        pBefore->pLink = &pNew;
+        pBefore->pLink = pNew;
     }
     else{
         
@@ -61,7 +61,7 @@ int addLinkedListData(LinkedList* pList, int position, int data){
         pAfter->pLink = NULL;
 
         pBefore = getLinkedListPointer(pList, pList->currentCount);
-        pBefore->pLink = &pAfter;
+        pBefore->pLink = pAfter;
     }
 
     pList->currentCount++;
