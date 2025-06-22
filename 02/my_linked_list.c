@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
     addData(pList,4,40);
     addData(pList,5,50);
     addData(pList,6,60);
-    addData(pList,7,70);
+    addData(pList,10,70);
     printData(pList);printf("\n");
 
     value = getData(pList,2);
@@ -60,23 +60,22 @@ int getData(linked_list* p, int n){
 
 int addData(linked_list* p, int n, int data){
     if( n < 0 || n > (p->count+1)){
-        printf("wrong position node is [%d] ~ [%d]\n", 0, p->count);
+        printf("%dis wrong position. node count [%d]\n",n, p->count);
         return 0;
     }
     node* pre = &(p->start_node);
     node* new = calloc(1,sizeof(node));
 
-    if(n > p->count){   // 마지막에 추가하는경우
-        for(int i=1; i<= p->count; i++) // i<= p->count ==> 마지막노드
-            pre = pre->p;
+    if(n > p->count){           // 마지막에 추가하는경우
+        for(int i=1; i<= p->count; i++) 
+            pre = pre->p;       // pre = 마지막 노드
         pre->p = new;
-        new->p = NULL;
         new->data = data;
     }
     else if(n <= p->count){     // 중간에 끼우는경우. 
                                 // 1.할당 2.할당p = (마지막노드 -1) p  3.마지막-1노드 = 할당p
-        for(int i=1; i< n;i++){ // i< n == (마지막노드 -1)
-           pre = pre->p;        // pre == (마지막 -1) 노드 주소
+        for(int i=1; i< n;i++){ 
+           pre = pre->p;        // pre == (마지막 -1) 노드
         }
         new->p = pre->p;
         pre->p = new;
