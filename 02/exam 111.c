@@ -42,7 +42,7 @@ int main(void){
             }
         }
         if(!add(s,score)){
-            printf("wrong input...try again\n");
+            printf("[입력에 문제가 있습니다](재입력)\n");
             continue;
         }
         count++;
