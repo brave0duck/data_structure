@@ -68,11 +68,8 @@ int len(list* s){
 // 마지막노드를 찾아서 뒤에 추가한다. 
 int add(list* s, double score){
     node* p = s->pNode;             // 헤더부터 찾기 시작
-    while(p){                       
-        if(p->plink == NULL)        // 마지막노드 바로전 노드를 찾는게 목적
-            break;
-        else
-            p = p->plink;
+    while(p != NULL && p->plink !=NULL){                       
+        p = p->plink;
     }
     node* new = calloc(1,sizeof(node));
     if(new){

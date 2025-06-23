@@ -21,6 +21,7 @@ int getLen(linked_list* p);
 int getLen2(linked_list* p);
 void printData(linked_list* p);
 void concatList(linked_list* a, linked_list* b);
+void reverse(linked_list* p);
 
 int main(int argc, char* argv[]){
     linked_list* a=NULL;
@@ -49,6 +50,13 @@ int main(int argc, char* argv[]){
     printf("[linked list b]\n");
     printData(b);
 
+    printf("reverse List...\n");
+    reverse(a);
+    printData(a);
+    printf("re-reverse List...\n");
+    reverse(a);
+    printData(a);
+    
     deleteData(a);
     deleteData(b);
 
@@ -185,4 +193,27 @@ void deleteData(linked_list* p){
     free(p);    //리스트본체도 삭제
     
 }
+// 리스트를 역순으로 배치하는 함수
+// 1. 전체 노드를 돌면
+void reverse(linked_list* p){
+    node* start = p->start_node.p;      // 현재, 다음, 다음이 가리키는 다음주소 3개 필요
+    node* next = start->p;              // 시작주소 - start, 다음주소-next, 다음이 가리키는다음주소-tracker
+    node* tracker = next->p;
 
+    start->p = NULL;                    // 이제 1번노드는 마지막노드이므로 주소칸에 NULL
+
+    while(start != NULL && next !=NULL){
+        if(tracker != NULL){            // 마지막노드 만날때까지 반복
+            next->p = start;            // 리버스방향이므로 A->B가 아닌 B->A. A의 주소를 B의 링크포인터에 저장
+            start = next;               // 다음칸으로 이동
+            next = tracker;
+            tracker = next->p;
+        }
+        else{                           // 마지막에 도달하면. 마지막노드 링크포인터에 이전주소 저장한후. 헤더노드와 연결
+            next->p = start;
+            p->start_node.p = next;
+            break;
+        }
+   }
+    
+}
