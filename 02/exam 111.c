@@ -65,14 +65,22 @@ int len(list* s){
     }
     return count;
 }
+// 마지막노드를 찾아서 뒤에 추가한다. 
 int add(list* s, double score){
-    node* p = s->pNode;
-    while(p)
-        p = p->plink;
-    
+    node* p = s->pNode;             // 헤더부터 찾기 시작
+    while(p){                       
+        if(p->plink == NULL)        // 마지막노드 바로전 노드를 찾는게 목적
+            break;
+        else
+            p = p->plink;
+    }
     node* new = calloc(1,sizeof(node));
     if(new){
-        p = new;
+        if(!s->pNode)               // 헤더노드가 비었으면 첫번째 추가
+            s->pNode = new;     
+        else
+            p->plink = new;         // 헤더노드가 있으면 마지막 노드에 추가
+
         new->score = score;
         new->plink = NULL;
         return 1;
@@ -82,8 +90,8 @@ int add(list* s, double score){
     }
 }
 double average(list* s){
-    double total=0.0f;
-    int count;
+    double total=0;
+    int count=0;
     node* p = s->pNode;
     while(p){
         total += p->score;
@@ -91,7 +99,7 @@ double average(list* s){
         count++;
     }
 
-    return total / (double)count;
+    return (total / (double)count);
 }
 int print(list* s){
     int count=0;
