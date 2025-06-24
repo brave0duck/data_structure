@@ -13,6 +13,7 @@ typedef struct DoublyListType{
 }DoublyList;
 
 // function declaration
+// ADT act - create, get , add, remove, length, display(print-all), delete
 DoublyList* createDoublyList();
 int getDoublyListData(DoublyList* pList, int position);
 int addDoublyListData(DoublyList* pList, int position, int data);

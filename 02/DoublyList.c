@@ -6,29 +6,21 @@
 int main(void){
     DoublyList* dll;
 
-    dll = createDoublyList();
+    dll = createDoublyList();       // double linked list = dll
 
     addDoublyListData(dll, 1,10);
     addDoublyListData(dll, 2,20);
     addDoublyListData(dll, 2,30);
-    addDoublyListData(dll, 4,40);
-    addDoublyListData(dll, 5,50);
     displayDoublyList(dll);
 
-    printf("1 th data is %d\n", getDoublyListData(dll,1));
-    printf("3 th data is %d\n", getDoublyListData(dll,3));
-
-    removeDoublyListData(dll,2);
+    printf("1th data delete.\n");
+    removeDoublyListData(dll,1);
     displayDoublyList(dll);
 
     deleteDoublyList(dll);
 
     return 0;
 }
-
-
-
-
 
 DoublyList* createDoublyList(){
     DoublyList * pdll = (DoublyList*)calloc(1, sizeof(DoublyList));
@@ -51,53 +43,64 @@ int addDoublyListData(DoublyList* pList, int position, int data){
         printf("position wrong. there is %d element", pList->currentCount);
         return 0;
     }
-    DoublyListNode* pPre = pList->headerNode.pRLink;
+    DoublyListNode* pPre = &(pList->headerNode);
     DoublyListNode* pNew = (DoublyListNode*)calloc(1,sizeof(DoublyListNode));
 
-    for(int i=1; i <= position;i++)
+    if(pNew == NULL){
+        perror("Memory allocation failed...");
+        return 0;
+    }
+    for(int i=1; i < position;i++)
         pPre = pPre->pRLink;
 
-    if(position > pList->currentCount){ // last input
-        pNew->data = data;
-        pNew->pLLink = pPre;
-        pNew->pRLink = pList->headerNode.pLLink;
-        pPre->pRLink = pNew;
-    }
-    else{   // insert input
+    if(position > pList->currentCount){             // last input . ex) a - (b)
+        pNew->data = data;                          // b.data = data
+        pNew->pLLink = pPre;                        // <Left-link>.b.xxxx = a address
+        pNew->pRLink = pList->headerNode.pLLink;    // xxxx.b.<Right-link> = header address
+        pPre->pRLink = pNew;                        // xxxx.a.<Right-link> = b address
         
-        pNew->data = data;
-        pNew->pLLink = pPre->pLLink;
-        pNew->pRLink = pPre;
-        pPre->pLLink = pNew;
-        pPre->pRLink = pList->headerNode.pLLink;
+    }
+    else{                                           // insert input. ex) a - (b) - c
+        
+        pNew->data = data;                          // b.data = data
+        pNew->pLLink = pPre;                        //  <Left-link>. b . xxxx = a address
+        pNew->pRLink = pPre->pRLink;                // xxxx.b.<Right-link> = c address
+        
+        pPre->pRLink->pLLink = pNew;                // <Left-link>.c.xxxx = b address
+        pPre->pRLink = pNew;                        // xxxx.a.<Right-link> = b address
+        
     }
 
-    pList->currentCount++;
+    pList->currentCount++;                          // member + 1
     return 1;
 
 }
 int removeDoublyListData(DoublyList* pList,int position){
+    if( position < 1 || position > (pList->currentCount + 1)){
+        printf("Wrong input node position. now node [%d]\n", 0, pList->currentCount);
+        return 0;
+    }
     DoublyListNode* pNode = &(pList->headerNode);
 
     for(int i=1; i<=position;i++){      //find node for delete
         pNode = pNode->pRLink;
     }
 
-    if(pNode->pRLink == pList->headerNode.pLLink){      // if it is last node
+    if(pNode->pRLink == pList->headerNode.pLLink){   // if last node
         pNode->pLLink->pRLink = pList->headerNode.pLLink;
         pList->headerNode.pLLink = pNode->pLLink->pRLink;
         pNode->pRLink = NULL;
         pNode->pLLink = NULL;
         free(pNode);
     }
-    else{       // if middle node
+    else{                                           // if middle node
         pNode->pLLink->pRLink = pNode->pRLink;
         pNode->pRLink->pLLink = pNode->pLLink;
         pNode->pLLink = NULL;
         pNode->pRLink = NULL;
         free(pNode);
     }
-    pList->currentCount--;
+    pList->currentCount--;                          // member - 1
     return 1;
 }
 int getDoublyListLength(DoublyList* pList){
@@ -105,11 +108,13 @@ int getDoublyListLength(DoublyList* pList){
 }
 void displayDoublyList(DoublyList* pList){
     DoublyListNode* pNode = pList->headerNode.pRLink;
+    printf("====================================\n");
     for(int i=1; i<= pList->currentCount; i++){
         printf("[%d]-%d\n", i, pNode->data);
         pNode = pNode->pRLink;
     }
-    printf("\n[%d]node\n",pList->currentCount);
+    printf("total : %d node\n",pList->currentCount);
+    printf("====================================\n");
 
 }
 void deleteDoublyList(DoublyList* pList){
