@@ -101,7 +101,7 @@ int getData(linked_list* p, int n){
 }
 
 int addData(linked_list* p, int n, int data){
-    if( n < 0 || n > (p->count+1)){
+    if( n < 1 || n > (p->count+1)){
         printf("%dis wrong position. node count [%d]\n",n, p->count);
         return 0;
     }
