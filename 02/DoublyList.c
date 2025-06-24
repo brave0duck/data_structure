@@ -77,7 +77,7 @@ int addDoublyListData(DoublyList* pList, int position, int data){
 }
 int removeDoublyListData(DoublyList* pList,int position){
     if( position < 1 || position > (pList->currentCount + 1)){
-        printf("Wrong input node position. now node [%d]\n", 0, pList->currentCount);
+        printf("Wrong input node position. now node [%d]\n", pList->currentCount);
         return 0;
     }
     DoublyListNode* pNode = &(pList->headerNode);
