@@ -193,11 +193,10 @@ void deleteData(linked_list* p){
     free(p);    //리스트본체도 삭제
     
 }
-// 리스트를 역순으로 배치하는 함수
-// 1. 전체 노드를 돌면
+// 리스트를 역순으로 바꾸는 함수
 void reverse(linked_list* p){
     node* start = p->start_node.p;      // 포인터 3개 필요
-    node* next = start->p;              // 시작주소 - start, 다음주소-next, 다음이 가리키는다음주소-tracker
+    node* next = start->p;              // 시작주소 - start, 다음주소-next, 다음주소의 다음주소-tracker
     node* tracker = next->p;
 
     start->p = NULL;                    // 이제 1번노드는 마지막노드이므로 주소칸에 NULL
