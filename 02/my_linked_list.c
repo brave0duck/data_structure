@@ -109,8 +109,10 @@ int addData(linked_list* p, int n, int data){
     node* new = calloc(1,sizeof(node));
 
     if(n > p->count){           // 마지막에 추가하는경우
-        for(int i=1; i<= p->count; i++) 
+        for(int i=1; i<= p->count; i++){
             pre = pre->p;       // pre = 마지막 노드
+        }
+        new->p = NULL;
         pre->p = new;
         new->data = data;
     }
