@@ -7,7 +7,7 @@ int main(void){
     return 0;
 }
 node* sll_create(element_type data){
-    node* p = (node*)malloc(1,sizeof(node));
+    node* p = (node*)malloc(sizeof(node));
     p->data = data;
     p->NextNode = NULL;
     return p;
