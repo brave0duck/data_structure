@@ -58,22 +58,17 @@ int addDoublyListData(DoublyList* pList, int position, int data){
         pNew->pLLink = pPre;                        // <Left-link>.b.xxxx = a address
         pNew->pRLink = pList->headerNode.pLLink;    // xxxx.b.<Right-link> = header address
         pPre->pRLink = pNew;                        // xxxx.a.<Right-link> = b address
-        
     }
     else{                                           // insert input. ex) a - (b) - c
-        
         pNew->data = data;                          // b.data = data
         pNew->pLLink = pPre;                        //  <Left-link>. b . xxxx = a address
         pNew->pRLink = pPre->pRLink;                // xxxx.b.<Right-link> = c address
         
         pPre->pRLink->pLLink = pNew;                // <Left-link>.c.xxxx = b address
         pPre->pRLink = pNew;                        // xxxx.a.<Right-link> = b address
-        
     }
-
     pList->currentCount++;                          // member + 1
     return 1;
-
 }
 int removeDoublyListData(DoublyList* pList,int position){
     if( position < 1 || position > (pList->currentCount + 1)){
