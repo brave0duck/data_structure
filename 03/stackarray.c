@@ -1,35 +1,34 @@
 #include "stackarray.h"
-#define MAX 100
+#define MAX 10
 
 int main(void){
-
+    
     Stack * pStack = Create(MAX);
     node Node;
+
+    printf("1 Pop()\n");
     if(Pop(pStack))
         fprintf(stdout,"pop error\n");
 
+    printf("1 to MAX Push()\n");
     for(int i=1; i<=MAX; i++){
         Node.data = i;
         Push(pStack,&Node);
     }
     printf("Stack count : %d\n", Count(pStack));
 
-    Node.data = 1004;
- 
-    Push(pStack,&Node);
-
-    printf("Stack count : %d\n", Count(pStack));
-
-    for(int i=1; i <= 20; i++){
+    if(!PrintStack(pStack))
+        printf("%d ==stack==\n",pStack->top);
+        
+    printf("20 Pop()\n");
+    for(int i=1; i <= 2; i++){
         Pop(pStack);
-        printf("Stack count : %d\n", Count(pStack));
     }
+    PrintStack(pStack);
 
     Delete(&pStack);
     printf("delete stack...\n");
     
-    printf("Stack count : %d\n", Count(pStack));
-
     return 0;
 }
 
@@ -48,6 +47,7 @@ Stack* Create(int size){
     
     return pStack;
 }
+
 int Delete(Stack** ppStack){
     if((*ppStack) !=NULL && (*ppStack)->pNode != NULL){
         (*ppStack)->top=0;
@@ -93,4 +93,14 @@ int Count(Stack* pStack){
         return 0;
     }
     return pStack->top;
+}
+int PrintStack(Stack* pStack){
+    if(pStack==NULL)
+        return 1;
+    printf("====== STACK ======\n");
+    for(int i=pStack->top-1; i>= 0; i--){
+        printf("%d stack: %d\n", i, pStack->pNode[i].data);
+    }
+    printf("====== STACK ======\n");
+    return 0;
 }
