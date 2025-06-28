@@ -1,45 +1,43 @@
 /**
- * 스택 링크드 리스트를 더불링크드 리스트로 구현함
- * -첨엔 싱글 링크드 리스트로 구현했으나 push는 편한데 pop은 불편함
- * - 헤더노드에 마지막주소를 저장하는 변수추가
- * - 이렇게되면 접근,추가,삭제 연산 모두 링크드리스트에 비해 유연
+ * - 스택 링크드 리스트를 더불링크드 리스트로 구현
+ * - 첨엔 싱글 링크드 리스트로 구현했으나 push는 편한데 pop은 불편함
+ * - 접근 편의를 위해 헤더노드에 마지막주소를 저장하는 변수추가. STACK은 마지막만 PUSH,POP하기때문
+ * - 접근,추가,삭제 모두 단순 링크드리스트에 비해 유연
  * - 단점: 노드크기증가, 구현이 복잡함
  * 
- * header[top|*pEnd|*pStart] ->[*pPrev|data|*pNext]->[*pPrev|data|*pNext]
- */
+ *  header[top|*pEnd|*pStart] ->  [*pPrev|data|*pNext]     ->  [*pPrev|data|*pNext]
+ *        [크기][끝주소][시작주소]      [이전주소][데이타][다음주소]
+ */        
 #include "stacklist.h"
-#define MAX 5
+#define MAX 1000
 
 int main(void){
-    
+    clock_t start, end;
+
+    start = clock();
     Stack * pStack = Create();
     node *pNode;
 
-    printf("1 Pop()\n");
-    if(Pop(pStack))
-        fprintf(stdout,"pop error\n");
-
-    printf("1 to MAX Push()\n");
+    printf("Push 10 elements...\n");
     for(int i=1; i<=MAX; i++){
         pNode = (node*)malloc(sizeof(node));
-        printf("stack data input -> ");
-        scanf("%d", &pNode->data);
-
+        pNode->data = i*10;
         Push(pStack,&pNode);
     }
-    printf("Stack count : %d\n", Count(pStack));
-
-    Print(pStack);
-
-    printf("2 Pop()\n");
-    for(int i=1; i <= 2; i++){
+    //Print(pStack);
+    
+    printf("Pop 5 elements...\n");
+    for(int i=1; i <= 5; i++){
         Pop(pStack);
     }
-    Print(pStack);
+    //Print(pStack);
 
-    Delete(&pStack);
     printf("delete stack...\n");
+    Delete(&pStack);
     
+    end = clock();
+
+    printf("running time is %f sec", (end-start)/(double)CLOCKS_PER_SEC);
     return 0;
 }
 
@@ -109,8 +107,10 @@ int Count(Stack* pStack){
 }
 void Print(Stack* pStack){
     node* p =pStack->pEnd;
+    printf("=====Stack Print=====\n");
     while(p!=NULL && p != (node*)pStack){
         printf("%d\n",p->data);
         p = p->pPrev;
     }
+    printf("Stack count : %d\n", Count(pStack));
 }
