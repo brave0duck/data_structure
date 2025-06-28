@@ -5,7 +5,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main", // 컴파일된 실행파일 경로로 수정
+            "program": "${workspaceFolder}/", // 컴파일된 실행파일 경로로 수정
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
