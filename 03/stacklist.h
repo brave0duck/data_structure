@@ -19,7 +19,7 @@ typedef struct stack{
 
 Stack* Create();
 int Delete(Stack** ppStack);
-int Push(Stack* pStack, node* input);
+int Push(Stack* pStack, node** input);
 int Pop(Stack* pStack);
 int Count(Stack* pStack);
 void Print(Stack* pStack);

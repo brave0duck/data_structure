@@ -13,7 +13,7 @@
 int main(void){
     
     Stack * pStack = Create();
-    node Node;
+    node *pNode;
 
     printf("1 Pop()\n");
     if(Pop(pStack))
@@ -21,14 +21,17 @@ int main(void){
 
     printf("1 to MAX Push()\n");
     for(int i=1; i<=MAX; i++){
-        Node.data = i;
-        Push(pStack,&Node);
+        pNode = (node*)malloc(sizeof(node));
+        printf("stack data input -> ");
+        scanf("%d", &pNode->data);
+
+        Push(pStack,&pNode);
     }
     printf("Stack count : %d\n", Count(pStack));
 
     Print(pStack);
 
-    printf("20 Pop()\n");
+    printf("2 Pop()\n");
     for(int i=1; i <= 2; i++){
         Pop(pStack);
     }
@@ -41,31 +44,28 @@ int main(void){
 }
 
 Stack* Create(){
-    Stack* p = (Stack*)malloc(sizeof(Stack));
-    p->top=0;
-    p->pStart = (node*)p;
-    p->pEnd = (node*)p;
-
+    Stack* p = (Stack*)calloc(1,sizeof(Stack));
+    
     return p;
 }
-int Push(Stack* pStack, node* input){
+int Push(Stack* pStack, node** input){
     
     if(input == NULL){
         perror("memory allocation fail");
         return EOF;
     }
     if(pStack->pStart == NULL){     // if first
-        input->pNext = NULL;
-        input->pPrev = pStack->pStart;
-        pStack->pStart = input;
-        pStack->pEnd = input;
+        (*input)->pNext = NULL;
+        (*input)->pPrev = (node*)pStack;
+        pStack->pStart = (*input);
+        pStack->pEnd = (*input);
         
     }
     else{                           // not first
-        input->pPrev = pStack->pEnd;
-        input->pNext = NULL;
-        pStack->pEnd->pNext = input;
-        pStack->pEnd = input;
+        (*input)->pPrev = pStack->pEnd;
+        (*input)->pNext = NULL;
+        pStack->pEnd->pNext = (*input);
+        pStack->pEnd = (*input);
     }
 
     pStack->top++;
