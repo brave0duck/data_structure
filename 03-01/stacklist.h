@@ -22,6 +22,6 @@ int Delete(Stack** ppStack);
 int Push(Stack* pStack, node* input);
 int Pop(Stack* pStack);
 int Count(Stack* pStack);
-int Print(Stack* pStack);
+void Print(Stack* pStack);
 
 #endif
