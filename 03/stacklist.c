@@ -18,7 +18,7 @@ int main(void){
     Stack * pStack = Create();
     node *pNode;
 
-    printf("Push 10 elements...\n");
+    printf("Push 1000 elements...\n");
     for(int i=1; i<=MAX; i++){
         pNode = (node*)malloc(sizeof(node));
         pNode->data = i*10;
@@ -26,8 +26,8 @@ int main(void){
     }
     //Print(pStack);
     
-    printf("Pop 5 elements...\n");
-    for(int i=1; i <= 5; i++){
+    printf("Pop 500 elements...\n");
+    for(int i=1; i <= MAX/2; i++){
         Pop(pStack);
     }
     //Print(pStack);

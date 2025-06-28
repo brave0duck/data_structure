@@ -9,15 +9,15 @@ int main(void){
     clock_t start, end;
     start = clock();
 
-    printf("Push 10 elements...\n");
+    printf("Push 1000 elements...\n");
     for(int i=1; i<=MAX; i++){
         Node.data = i*10;
         Push(pStack,&Node);
     }
     //PrintStack(pStack);
 
-    printf("Pop 5 elements...\n");
-    for(int i=1; i <= 5; i++){
+    printf("Pop 500 elements...\n");
+    for(int i=1; i <= MAX/2; i++){
         Pop(pStack);
     }
 
