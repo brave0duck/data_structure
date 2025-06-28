@@ -92,8 +92,8 @@ int Pop(Stack* pStack){
 int Delete(Stack** ppStack){
     
     if( (*ppStack)->top > 0){   // If there is at least one
-        node* pDel = (*ppStack)->pEnd;
-        node* prev_address = pDel->pPrev;
+        node* pDel = (*ppStack)->pEnd;      // last node
+        node* prev_address = pDel->pPrev;   // prev last node
 
         while( (*ppStack)->top--){
             free(pDel);
