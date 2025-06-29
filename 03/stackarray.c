@@ -28,7 +28,7 @@ int main(void){
     
     end = clock();
 
-    printf("running time is %f sec", (end-start)/(double)CLOCKS_PER_SEC);
+    printf("running time is %f sec\n", (end-start)/(double)CLOCKS_PER_SEC);
 
     return 0;
 }
