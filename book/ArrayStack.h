@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+
 
 typedef struct ArrayStackNodeType{
 	char data;
@@ -16,8 +16,8 @@ typedef struct ArrayStackType{
 } ArrayStack;
 
 ArrayStack* createStack(int size);	//스택 생성
-bool isFull(ArrayStack* pStack);	// 스택 가득찼나 확인. 차면 1, 아니면 0
-bool isEmpty(ArrayStack* pStack);	// 스택 비었나 확인. 비었으면 1, 아니면 0
+int isFull(ArrayStack* pStack);	// 스택 가득찼나 확인. 차면 1, 아니면 0
+int isEmpty(ArrayStack* pStack);	// 스택 비었나 확인. 비었으면 1, 아니면 0
 int pushAS(ArrayStack* pStack, char data);	// 푸시  - 성공0, 실패1
 ArrayStackNode* popAS(ArrayStack* pStack);	//팝 - 메모리할당 ->복사-> 반환. 해제는 메인함수에서
 ArrayStackNode* peekAS(ArrayStack* pStack);	// 피크. 탑 주소반환
