@@ -88,7 +88,7 @@ void displayLinkedStack(LinkedStack* pStack){
     if(pStack != NULL){
         LinkedStackNode* p = pStack->pTop;
         int count = pStack->currentCount;
-        printf("====== STACK ======\n");
+        printf("Node count : %d\n",count);
         while(p){
             printf("[%d] - [%c]\n", count--, p->data);
             p = p->pLink;
