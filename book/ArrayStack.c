@@ -1,9 +1,7 @@
 #include "ArrayStack.h"
 
 int main(int argc, char* argv[]){
-    if(argc < 2){
-        perror("Usage : ArrayStack [Object]\t Object make Array\n");
-    }
+    
     ArrayStack* pStack = NULL;
     ArrayStackNode* pNode = NULL;
 
@@ -15,18 +13,21 @@ int main(int argc, char* argv[]){
         pushAS(pStack,'D');
         displayArrayStack(pStack);
 
+        
         pNode = popAS(pStack);
         if(pNode != NULL){
-            printf("Pop value - [%c]\n", pNode->data);
+            printf("Pop - [%c]\n", pNode->data);
             free(pNode);
         }
         displayArrayStack(pStack);
 
+        
         pNode = peekAS(pStack);
         if(pNode != NULL){
-            printf("Peek value - [%c]\n", pNode->data);
+            printf("Peek - [%c]\n", pNode->data);
         }
         displayArrayStack(pStack);
+        printf("delete Stack...\n");
         deleteArrayStack(pStack);
     }
     return 0;
@@ -44,14 +45,14 @@ ArrayStack* createStack(int size){
     return pStack;
 }
 // 스택 가득찼나 확인. 차면 1, 아니면 0
-int isFull(ArrayStack* pStack){
+static inline int isFull(ArrayStack* pStack){
     if(pStack->currentCount >= pStack->maxCount)
         return 1;
     else
         return 0;
 }
 // 스택 비었나 확인. 비었으면 1, 아니면 0
-int isEmpty(ArrayStack* pStack){
+static inline int isEmpty(ArrayStack* pStack){
     if(pStack->currentCount <= 0)
         return 1;
     else
@@ -59,7 +60,7 @@ int isEmpty(ArrayStack* pStack){
 }
 // 푸시  - 성공0, 실패1
 int pushAS(ArrayStack* pStack, char data){
-    if(pStack != NULL){
+    if(pStack != NULL && !isFull(pStack)){
         pStack->pData[pStack->currentCount].data = data;
         pStack->currentCount++;
         return 0;
@@ -70,7 +71,7 @@ int pushAS(ArrayStack* pStack, char data){
 //팝 - 메모리할당 ->복사-> 반환. 해제는 메인함수에서
 ArrayStackNode* popAS(ArrayStack* pStack){
     ArrayStackNode *pNode = malloc(sizeof(ArrayStackNode));
-    if(pStack != NULL && pNode != NULL && pStack->currentCount > 0){
+    if(pStack != NULL && pNode != NULL && !isEmpty(pStack)){
         pNode->data = pStack->pData[pStack->currentCount-1].data;
         pStack->currentCount--;
 
@@ -81,7 +82,7 @@ ArrayStackNode* popAS(ArrayStack* pStack){
 }
 // 피크. 탑 주소반환
 ArrayStackNode* peekAS(ArrayStack* pStack){
-    if(pStack!=NULL && pStack->currentCount > 0){
+    if(pStack!=NULL && !isEmpty(pStack)){
         return &(pStack->pData[pStack->currentCount-1]);
     }
     else
