@@ -1,12 +1,19 @@
 /*
-문자열을 입력받아 연산자를 만날때까지 하나씩 이동
-연산자를 만나면 스택에서 두 요소를 꺼내서 연산을 한다 ( pop())
-연산결과를 스택에 푸쉬한다 ( push())
+후위연산자를 구현
+스택을 이용한다
+컴퓨터 실제 내부에서는 후위연산이 기본.
 
-연산자가 없다. or 끝까지 다 돌았다
-스택에 있는 결과를 출력한다
+ex) A + (B * C) 이것이 인간의 수식
+BUT 컴퓨터는 ABC*+ 이런식으로 계산함
 
-A + ( B * C)
+로직 - 
+1. 문자열을 입력받는다
+    1-1. 끝까지 돌면서 연산자를 만날때까지 하나씩 이동
+    1-2. 연산자를 만나면 스택에서 두 요소를 꺼내서 연산을 한다 ( pop())
+    1-3. 연산결과를 스택에 푸쉬한다 ( push())
+    1-4. 연산자가 없다. or 끝까지 다 돌았다
+    1-5. 스택에 있는 결과를 출력한다
+
 */
 #include "infix.h"
 #define MAX 50
@@ -17,7 +24,7 @@ int main(int argc, char* argv[]){
     pStack = create();      // create stack
     char input[MAX]={0};    // for input buffer
     
-    printf("Input string (max:50,exit:0) : ");
+    printf("infix operation input (max:50,exit:0) : ");
     fgets(input, MAX,stdin);
     input[strcspn(input, "\n")] = 0; // 개행 제거
     
@@ -27,7 +34,7 @@ int main(int argc, char* argv[]){
         memset(input,0,MAX);
     
         fflush(stdin);
-        printf("Input string (exit:0) : ");
+        printf("infix operation input (max:50, exit:0) : ");
         fgets(input, MAX,stdin);
         input[strcspn(input, "\n")] = 0; // 개행 제거
     }
@@ -57,19 +64,19 @@ double calcToken(LinkedStack *pStack, char* src){
             // til input 
             LinkedStackNode* pNode = calloc(1,sizeof(LinkedStackNode));
             switch (src[i])
-            {
+            {   // if meet operator
                 case '*':
                 case '/':
                 case '+':
                 case '-':
-                {
+                {   // find 2 pop() and operator
                     op = src[i];
                     p1 = pop(pStack);
                     p2 = pop(pStack);
                     if(p1 != NULL && p2 != NULL){
                         pNode->data.value  = operation(p2->data.value, p1->data.value, op);
                         if(pNode->data.value != 0.0)
-                            push(pStack, pNode);
+                            push(pStack, pNode);        // and result push()
                     }
                     else{
                         printf("operation error... should be operand\n");
