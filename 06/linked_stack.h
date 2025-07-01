@@ -20,4 +20,7 @@ LinkedStackNode* peekLS(LinkedStack* pStack);//피크. pTop주소반환
 void deleteLinkedStack(LinkedStack* pStack);
 void displayLinkedStack(LinkedStack* pStack);
 
+
+char* reversString(char* src);
+
 #endif

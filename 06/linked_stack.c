@@ -3,6 +3,7 @@
 #include <string.h>
 #include "linked_stack.h"
 
+
 LinkedStack* createLinkedStack(){               //생성
     LinkedStack* pStack = calloc(1,sizeof(LinkedStack));
     if(pStack == NULL){
@@ -24,7 +25,7 @@ int pushLS(LinkedStack* pStack, char data){     //푸시. 메모리할당->링�
     }
     return 1;
 }
-LinkedStackNode* popLS(LinkedStack* pStack){        //팝.  링크재연결->탑링크 주소 반환
+LinkedStackNode* popLS(LinkedStack* pStack){        //팝.  링크재연결->탑링크 주소 반환. 받은쪽이해제
     LinkedStackNode * pNode;
     if(pStack != NULL){
         pNode = pStack->pTop;
