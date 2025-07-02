@@ -10,15 +10,16 @@ typedef struct n{
 }Node;
 
 typedef struct q{
-    int frond;
+    int front;
     int end;
     Node* pNode;
 }Queue;
 
 Queue* Create(int size);
-int EnQueue(Queue* pQ);
-int DeQueue(Queue* pQ);
+void EnQueue(Queue* pQ);
+Node* DeQueue(Queue* pQ);
 int isEmpty(Queue* pQ);
+int isFull(Queue* pQ);
 int Delete(Queue * pQ);
 int CountQueue(Queue* pQ);
 int PrintQueue(Queue* pQ);
