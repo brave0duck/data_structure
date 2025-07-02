@@ -64,11 +64,11 @@ double calcToken(LinkedStack *pStack, char* src){
             LinkedStackNode* pNode = calloc(1,sizeof(LinkedStackNode));
             switch (src[i])
             {   
-                case '*':           // if meet operator
+                case '*':           // if meet operator, 2 pop()
                 case '/':
                 case '+':
                 case '-':
-                {                   // find 2 pop() and operator
+                {                   
                     op = src[i];
                     p1 = pop(pStack);
                     p2 = pop(pStack);
@@ -84,10 +84,10 @@ double calcToken(LinkedStack *pStack, char* src){
                     free(p2);
                     break;
                 }   
-                default:
+                default:            // if meet number, 1 push()
                 {
                     op = src[i];
-                    pNode->data.value = (double) (op - '0');        //trans '9' -> 9.0
+                    pNode->data.value = (double) (op - '0');        // ex) '1' - '0' = 1. transfomation character'9' -> double 9.0
                     push(pStack, pNode);
                     break;
                 }

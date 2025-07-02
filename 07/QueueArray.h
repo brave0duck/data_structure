@@ -3,10 +3,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#define MAX 10
 
 typedef struct n{
-    int data;
+    char data;
 }Node;
 
 typedef struct q{
@@ -16,8 +16,9 @@ typedef struct q{
 }Queue;
 
 Queue* Create(int size);
-void EnQueue(Queue* pQ);
+int EnQueue(Queue* pQ,char data);
 Node* DeQueue(Queue* pQ);
+Node* peekQueue(Queue* pQ);
 int isEmpty(Queue* pQ);
 int isFull(Queue* pQ);
 int Delete(Queue * pQ);
