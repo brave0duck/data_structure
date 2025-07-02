@@ -1,10 +1,10 @@
 /*
 후위연산자를 구현
-스택을 이용한다
-컴퓨터 실제 내부에서는 후위연산이 기본.
-
 ex) A + (B * C) 이것이 인간의 수식
 BUT 컴퓨터는 ABC*+ 이런식으로 계산함
+
+스택을 이용한다
+
 
 로직 - 
 1. 문자열을 입력받는다
@@ -24,9 +24,9 @@ int main(int argc, char* argv[]){
     pStack = create();      // create stack
     char input[MAX]={0};    // for input buffer
     
-    printf("infix operation input (max:50,exit:0) : ");
+    printf("infix operation input (max:50,exit:0) : "); // user input
     fgets(input, MAX,stdin);
-    input[strcspn(input, "\n")] = 0; // 개행 제거
+    input[strcspn(input, "\n")] = 0; // remove null
     
 
     while(input[0] !='0'){      // exit : 0
@@ -36,15 +36,14 @@ int main(int argc, char* argv[]){
         fflush(stdin);
         printf("infix operation input (max:50, exit:0) : ");
         fgets(input, MAX,stdin);
-        input[strcspn(input, "\n")] = 0; // 개행 제거
+        input[strcspn(input, "\n")] = 0; // remove null
     }
 
     delete(pStack);
 
     return 0;
 }    
-// ex) operation(3.0, 4.0, '+')  = 3 + 4
-double operation(double a, double b, char op){
+double operation(double a, double b, char op){          // ex) operation(3.0, 4.0, '+')  = 3 + 4
     if(op == '*')
         return a*b;
     else if(op == '/')
@@ -57,26 +56,26 @@ double operation(double a, double b, char op){
         return 0.0;
 }
 double calcToken(LinkedStack *pStack, char* src){
-    LinkedStackNode* p1, *p2;
-    char op;
+    LinkedStackNode* p1, *p2;       // for pop extract
+    char op;                        // save operator
     if(pStack != NULL){
         for(int i=0; i < strlen(src); i++){
-            // til input 
+            
             LinkedStackNode* pNode = calloc(1,sizeof(LinkedStackNode));
             switch (src[i])
-            {   // if meet operator
-                case '*':
+            {   
+                case '*':           // if meet operator
                 case '/':
                 case '+':
                 case '-':
-                {   // find 2 pop() and operator
+                {                   // find 2 pop() and operator
                     op = src[i];
                     p1 = pop(pStack);
                     p2 = pop(pStack);
                     if(p1 != NULL && p2 != NULL){
                         pNode->data.value  = operation(p2->data.value, p1->data.value, op);
                         if(pNode->data.value != 0.0)
-                            push(pStack, pNode);        // and result push()
+                            push(pStack, pNode);        // operation and result re-push()
                     }
                     else{
                         printf("operation error... should be operand\n");
