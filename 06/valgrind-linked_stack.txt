@@ -1,0 +1,14 @@
+==23510== Memcheck, a memory error detector
+==23510== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==23510== Using Valgrind-3.25.1 and LibVEX; rerun with -h for copyright info
+==23510== Command: ./linked_stack
+==23510== Parent PID: 5967
+==23510== 
+==23510== 
+==23510== HEAP SUMMARY:
+==23510==     in use at exit: 0 bytes in 0 blocks
+==23510==   total heap usage: 9 allocs, 9 frees, 2,150 bytes allocated
+==23510== 
+==23510== All heap blocks were freed -- no leaks are possible
+==23510== 
+==23510== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

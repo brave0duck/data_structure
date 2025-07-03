@@ -1,3 +1,6 @@
+// 스택을 이용해 문자열 거꾸로 출력하는 linked_stack.c의 메인함수
+// 사용자입력을 받아 실행한다
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

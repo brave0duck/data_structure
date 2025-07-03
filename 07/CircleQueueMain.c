@@ -1,20 +1,25 @@
+// circle queue impletement
+// using user-input
 #include "CircleQueue.h"
 
+// use func pointer. user input process
 int QueueInput(int (*pFunc)(Queue*,char), Queue* pQ, char input){
     int i=0;
     
     printf("Input Queue (exit:0) remain count-%d : ", (pQ->max - pQ->current));
     scanf(" %c",&input);
 
-    for(i=0; (i < pQ->max) && (input !='0') ; i++){
-        if(pFunc(pQ, input)){
+    for(i=0; (i < pQ->max) && (input !='0') ; i++){ // until queue max and input '0' exit
+        if(isFull(pQ))      // out if Full
+            break;
+
+        if(pFunc(pQ, input)){       // <---- func pointer call
             printf("input fail.Queue full");
             return 0;
         }
-        if(!isFull(pQ)){
-            printf("Input Queue (exit:0) remain count-%d : ", (pQ->max - pQ->current));
-            scanf(" %c", &input);
-        }
+        printf("Input Queue (exit:0) remain count-%d : ", (pQ->max - pQ->current));
+        scanf(" %c", &input);
+        
     }
     return i;
 }
