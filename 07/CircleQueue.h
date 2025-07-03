@@ -1,28 +1,32 @@
 #ifndef _CIRCLE_QUEUE_
 #define _CIRCLE_QUEUE_
-
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
+#define MAX 10
 
 typedef struct n{
-    int data;
+    char data;
 }Node;
 
 typedef struct q{
-    
-    int front;
+    int max;
+    int current;
+    int start;
     int end;
     Node* pNode;
 }Queue;
 
 Queue* Create(int size);
-void EnQueue(Queue* pQ);
+int EnQueue(Queue* pQ,char data);
 Node* DeQueue(Queue* pQ);
+Node* peek(Queue* pQ);
 int isEmpty(Queue* pQ);
 int isFull(Queue* pQ);
 int Delete(Queue * pQ);
-int CountQueue(Queue* pQ);
-int PrintQueue(Queue* pQ);
+static inline int Count(Queue* pQ);
+int Print(Queue* pQ);
+
+int QueueInput(int (*pFunc)(Queue*,char), Queue* pQ, char input);
 
 #endif

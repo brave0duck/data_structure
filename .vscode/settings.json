@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "linked_stack.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "string.h": "c"
     }
 }
