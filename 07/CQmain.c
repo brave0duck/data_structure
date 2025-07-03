@@ -22,15 +22,20 @@ int QueueInput(int (*pFunc)(Queue*,char), Queue* pQ, char input){
 int main(int argc,char* argv[]){
     Queue* pQ;    
     Node* pNode;
-    char s_input;
+    char input;
+
+    // Queue ADT
+    // create, delete, EnQueue, DeQueue, isEmpty, isFull, Count, Print
 
     pQ = Create(MAX);
-    if(!QueueInput(EnQueue,pQ, s_input))
-        printf("EnQueue failed\n");
-    // create, enqueue, dequeue, count, print
+    if(pQ == NULL){
+        printf("Queue Create fail!");
+        return 1;
+    }
+    printf("\n[%d] in Queue.\n", QueueInput(EnQueue,pQ, input));
     Print(pQ);
 
-    printf("\n DeQueue...\n");
+    printf("DeQueue...\n");
     pNode = DeQueue(pQ);
     if(pNode != NULL){
         printf("DeQueue value - [%c]\n", pNode->data);
@@ -45,8 +50,10 @@ int main(int argc,char* argv[]){
     }
     Print(pQ);
 
-    printf("if insert Queue insert 'E'? : \n");
-    EnQueue(pQ,'E');
+    printf("if insert Queue insert 'S'? : \n");
+    EnQueue(pQ,'S');
+    printf("if insert Queue insert 'Z'? : \n");
+    EnQueue(pQ,'Z');
     Print(pQ);
 
     Delete(pQ);

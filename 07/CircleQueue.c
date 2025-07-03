@@ -1,19 +1,21 @@
 #include "CircleQueue.h"
 
-
+// start = -1, end= -1 cause circle formula (x = x+1 % MAX)
 Queue* Create(int size){
     Queue * pQ = (Queue*)malloc(sizeof(Queue));
     if(pQ != NULL){
         pQ->pNode = (Node*)malloc(size*sizeof(Node));    // all init zero
         if(pQ->pNode == NULL)
             return NULL;
-        pQ->start = -1;
+        pQ->start = -1; 
         pQ->end = -1;
         pQ->current =0;
         pQ->max = size;
     }
     return pQ;
 }
+
+// insert Queue = First In First Out.
 int EnQueue(Queue* pQ, char data){
     if( !isFull(pQ)){
         int pos = (pQ->end+1) % (pQ->max);
@@ -22,23 +24,18 @@ int EnQueue(Queue* pQ, char data){
         pQ->current++;
         return 0;
     }
-    else{
-        printf("Queue is Full\n");
-        return 1;
-    }
+    return 1;
 }
 Node* DeQueue(Queue* pQ){
     Node* deNode = NULL;
     if( !isEmpty(pQ)){
         int pos = pQ->start + 1 % MAX;
         deNode = malloc(sizeof(Node));
+        if(deNode == NULL)
+            return NULL;
         deNode->data = pQ->pNode[pos].data;
         pQ->start++;
         pQ->current--;
-    }
-    else{
-        printf("Queue Empty\n");
-
     }
     return deNode;
 }
