@@ -60,20 +60,6 @@ int main(int argc, char* argv[]){
     deleteData(a);
     deleteData(b);
 
-
-    // linked_list * pList = NULL;
-    // int value=0;
-
-    // pList = create();
-    // addData(pList,1,10);
-    // addData(pList,2,20);
-    // addData(pList,2,30);
-
-    // printData(pList);
-
-    // deleteData(pList);
-    
-
     return 0;
 }
 linked_list* create(void){

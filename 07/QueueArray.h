@@ -10,7 +10,7 @@ typedef struct n{
 }Node;
 
 typedef struct q{
-    int front;
+    int start;
     int end;
     Node* pNode;
 }Queue;

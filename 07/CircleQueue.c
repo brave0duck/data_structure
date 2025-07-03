@@ -40,7 +40,7 @@ Node* DeQueue(Queue* pQ){
     }
     return deNode;
 }
-// check the target to be DeQueue
+// view next target to be DeQueue
 Node* peek(Queue* pQ){
     int pos = (pQ->start + 1) % pQ->max;
     return &(pQ->pNode[pos]);
@@ -78,10 +78,10 @@ static inline int Count(Queue* pQ){
 // The core logic of the circular queue is   x = (x + 1) % (max)
 int Print(Queue* pQ){
     int size = pQ->current;
-    int pos = (pQ->start +1) % pQ->max;
+    int pos = (pQ->start +1) % (pQ->max);
     printf("=QUEUE SIZE: %d, NODE SIZE : %d\n", pQ->max, Count(pQ));
     while(size--){
         printf("[%d]-[%c]\n",pos, pQ->pNode[pos].data);
-        pos = (pos + 1) % pQ->max;
+        pos = (pos + 1) % (pQ->max);
     }
 }

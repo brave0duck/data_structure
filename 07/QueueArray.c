@@ -36,7 +36,7 @@ Queue* Create(int size){
     if(pQ != NULL){
         pQ->pNode = (Node*)malloc(MAX*sizeof(Node));
         if(pQ->pNode != NULL){
-            pQ->front = 0;
+            pQ->start = 0;
             pQ->end = 0;
         }
     }
@@ -57,8 +57,8 @@ Node* DeQueue(Queue* pQ){
     Node* deNode = NULL;
     if( !isEmpty(pQ)){
         deNode = malloc(sizeof(Node));
-        deNode->data = pQ->pNode[pQ->front].data;
-        pQ->front++;
+        deNode->data = pQ->pNode[pQ->start].data;
+        pQ->start++;
     }
     else{
         printf("Queue Empty\n");
@@ -66,10 +66,10 @@ Node* DeQueue(Queue* pQ){
     return deNode;
 }
 Node* peekQueue(Queue* pQ){
-    return &(pQ->pNode[pQ->front]);
+    return &(pQ->pNode[pQ->start]);
 }
 int isEmpty(Queue* pQ){
-    if(pQ->end == pQ->front )
+    if(pQ->end == pQ->start )
         return 1;
     else
         return 0;
@@ -92,12 +92,12 @@ int Delete(Queue * pQ){
 
 }
 int CountQueue(Queue* pQ){
-    return (pQ->end - pQ->front);
+    return (pQ->end - pQ->start);
 
 }
 int PrintQueue(Queue* pQ){
     printf("=QUEUE SIZE: %d, NODE SIZE : %d\n", MAX, CountQueue(pQ));
-    for(int i=pQ->front; i<pQ->end; i++){
+    for(int i=pQ->start; i<pQ->end; i++){
         printf("[%d]-[%c]\n",i, pQ->pNode[i].data);
     }
 }

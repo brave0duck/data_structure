@@ -1,5 +1,6 @@
 #ifndef _CIRCLE_QUEUE_
 #define _CIRCLE_QUEUE_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

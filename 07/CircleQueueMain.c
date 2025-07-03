@@ -1,5 +1,10 @@
+//---------------------------------------------------------------
+//
 // circle queue impletement
 // using user-input
+//
+//---------------------------------------------------------------
+
 #include "CircleQueue.h"
 
 // use func pointer. user input process
@@ -10,10 +15,10 @@ int QueueInput(int (*pFunc)(Queue*,char), Queue* pQ, char input){
     scanf(" %c",&input);
 
     for(i=0; (i < pQ->max) && (input !='0') ; i++){ // until queue max and input '0' exit
-        if(isFull(pQ))      // out if Full
+        if(isFull(pQ))      // if full
             break;
 
-        if(pFunc(pQ, input)){       // <---- func pointer call
+        if(pFunc(pQ, input)){       // <---- call func pointer
             printf("input fail.Queue full");
             return 0;
         }
