@@ -1,3 +1,9 @@
+/**********************************************************
+ * Linked List Queue v0.01
+ * 
+ * ADT - create, delete, enqueue, dequeue, count , print
+ *
+ ***********************************************************/ 
 #include "Linked_Queue.h"
 
 Queue* Create(void)
@@ -5,19 +11,12 @@ Queue* Create(void)
     assert(pQ != NULL);
     return pQ;
 }
-Node* getLastNode(Queue* pQ){       // find last node address
-    Node* pNode = pQ->pFront;
-    while(pNode != NULL && pNode->pNext != NULL){
-        pNode = pNode->pNext;
-    }
-    return pNode;
-}
 int EnQueue(Queue* pQ,char data){   // 1. alloc 2. pointer sync 3. currentCount++
     assert(pQ !=NULL);
     Node* pNode = calloc(1,sizeof(Node));
     assert(pNode != NULL);
 
-    if(getLastNode(pQ) == NULL) // if first , connect to header node
+    if(isEmpty(pQ))                 // if first , connect to header node
         pQ->pFront = pNode;
     else
         pQ->pRear->pNext = pNode;   // if not first, connect last node's next 
@@ -29,7 +28,10 @@ int EnQueue(Queue* pQ,char data){   // 1. alloc 2. pointer sync 3. currentCount+
     return 0;
 }
 Node* DeQueue(Queue* pQ){       // 1. find 2. pointer sync 3. currentCount--
-    if(!isEmpty(pQ)){           // Only if it is not empty
+    if(isEmpty(pQ)){           // if it is empty
+        return NULL;
+    }
+    else{
         Node* pDel = pQ->pFront;    // pDel = Node address to delete
         if(pDel != NULL){
             pQ->pFront = pDel->pNext;
@@ -37,10 +39,6 @@ Node* DeQueue(Queue* pQ){       // 1. find 2. pointer sync 3. currentCount--
         }
         return pDel;
     }
-    else{
-        return NULL;
-    }
-    
 }
 int Delete(Queue * pQ){
     Node* pDel, *pNext;  // pDel = Node address to delete. 
