@@ -43,3 +43,21 @@ int main(int argc,char* argv[])
     
     return 0;
 }
+int QueueInput(int (*pFunc)(Queue*,char), Queue* pQ, char input){
+    int i=0;
+    
+    printf("Input Queue (exit:0) : ");
+    scanf(" %c",&input);
+
+    while( input !='0')// until queue max and input '0' exit
+    {
+        if(pFunc(pQ, input)){       // <---- call func pointer
+            printf("input fail.Queue full");
+            return 0;
+        }
+        printf("Input Queue (exit:0) : ");
+        scanf(" %c", &input);
+        
+    }
+    return pQ->currentCount;
+}
