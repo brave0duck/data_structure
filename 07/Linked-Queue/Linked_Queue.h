@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
+
 #define MAX 10
 
 typedef struct n{
@@ -20,7 +22,7 @@ typedef struct q{
 Queue* Create(void);
 int EnQueue(Queue* pQ,char data);
 Node* DeQueue(Queue* pQ);
-Node* getLastNode(Queue* pQ,int pos);
+Node* getLastNode(Queue* pQ);
 static inline Node* peek(Queue* pQ){return pQ->pFront;}
 static inline int isEmpty(Queue* pQ){ pQ->currentCount ? 0:1;}
 static inline int Count(Queue* pQ){return pQ->currentCount;}
