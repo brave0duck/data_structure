@@ -21,8 +21,11 @@ int main(int argc,char* argv[])
     printf("DeQueue...\n");
     pNode = DeQueue(pQ);
     if(pNode != NULL){
-        printf("DeQueue value - [%c]\n", pNode->data);
+        printf("success DeQueue - [%c]\n", pNode->data);
         free(pNode);
+    }
+    else{
+        printf("Fail DeQueue.it is Empty.\n");
     }
     Print(pQ);
     
