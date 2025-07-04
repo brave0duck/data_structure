@@ -35,7 +35,7 @@ Node* DeQueue(Queue* pQ){       // 1. find 2. pointer sync 3. currentCount--
             pQ->pFront = pDel->pNext;
             pQ->currentCount--;
         }
-        return pReturn;
+        return pDel;
     }
     else{
         return NULL;

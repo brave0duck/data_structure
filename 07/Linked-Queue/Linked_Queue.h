@@ -24,7 +24,7 @@ int EnQueue(Queue* pQ,char data);
 Node* DeQueue(Queue* pQ);
 Node* getLastNode(Queue* pQ);
 static inline Node* peek(Queue* pQ){return pQ->pFront;}
-static inline int isEmpty(Queue* pQ){ pQ->currentCount ? 0:1;}
+static inline int isEmpty(Queue* pQ){return (pQ->currentCount>0)?0:1;}
 static inline int Count(Queue* pQ){return pQ->currentCount;}
 int Delete(Queue * pQ);
 int Print(Queue* pQ);
