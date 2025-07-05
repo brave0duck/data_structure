@@ -67,7 +67,7 @@ int Push(Stack* pStack, node** input){
     }
 
     pStack->top++;
- 
+    return 0;
 }
 int Pop(Stack* pStack){
    if(pStack->top >= 1){        // If there is at least one

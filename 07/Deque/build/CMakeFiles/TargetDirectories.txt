@@ -1,3 +1,0 @@
-/home/speedking/work/data_structure/07/Deque/build/CMakeFiles/Deque.dir
-/home/speedking/work/data_structure/07/Deque/build/CMakeFiles/edit_cache.dir
-/home/speedking/work/data_structure/07/Deque/build/CMakeFiles/rebuild_cache.dir
