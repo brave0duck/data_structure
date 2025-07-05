@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/speedking/work/data_structure/07/Deque/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/Deque.dir/Deque.c.o -c /home/speedking/work/data_structure/07/Deque/Deque.c",
+  "file": "/home/speedking/work/data_structure/07/Deque/Deque.c",
+  "output": "CMakeFiles/Deque.dir/Deque.c.o"
+},
+{
+  "directory": "/home/speedking/work/data_structure/07/Deque/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/Deque.dir/main.c.o -c /home/speedking/work/data_structure/07/Deque/main.c",
+  "file": "/home/speedking/work/data_structure/07/Deque/main.c",
+  "output": "CMakeFiles/Deque.dir/main.c.o"
+}
+]
