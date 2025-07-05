@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/Deque.dir/link.d CMakeFiles/Deque.dir/main.c.o CMakeFiles/Deque.dir/Deque.c.o -o Deque
