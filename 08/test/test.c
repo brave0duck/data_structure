@@ -25,17 +25,12 @@ int four(int n){
     return n + four(n-1);
 }
 double five(double n){
-    if(n <= 0)
+    if(n <= 1)
         return 1;
-    return 1/five(n-2) + 1/five(n-1);
-}
-double harmonic(double n) {
-    if (n <= 1)
-        return 1.0;
-    return 1.0 / n + harmonic(n - 1);
+    return five(n-1) + 1/n;
 }
 int main(void){
-    printf("four result = %f\n\n", harmonic(10));
+    printf("five result = %f\n\n", five(10));
     //printf("four result = %d\n\n", four(100));
     return 0;
 }
