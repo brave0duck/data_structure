@@ -9,6 +9,9 @@
 #ifndef _LINKED_BINARY_TREE_
 #define _LINKED_BINARY_TREE_
 
+#include <stdio.h>
+//#include <stdlib.h>
+
 typedef struct BinTreeNodeType{
     char data;
     struct BinTreeNodeType* pLeftChild;
