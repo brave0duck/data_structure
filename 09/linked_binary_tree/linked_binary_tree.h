@@ -1,16 +1,19 @@
 /*******************************************************************
  * Linked binary Tree implementation
  * 
- * ADT
- * makeBinTree, getRootNode, addLeftChildNode, addRightChildNode,
- * getLeftChildNode,getRightChildNode,getData, deleteBinTree
+ *                    [BinTree]
+ *                       |
+ *                    [root]
+ *                       |
+ *  [left pointer] - [data]- [right pointer]
+ *   
+ * <ADT> - create, add(left, right) , get, delete
  * 
  *******************************************************************/
 #ifndef _LINKED_BINARY_TREE_
 #define _LINKED_BINARY_TREE_
 
 #include <stdio.h>
-//#include <stdlib.h>
 
 typedef struct BinTreeNodeType{
     char data;
@@ -22,13 +25,15 @@ typedef struct BinTreeType{
     struct BinTreeNodeType* pRootNode;
 }BinTree;
 
-BinTree* makeBinTree(char data);                            // malloc
-BinTreeNode* getRootNode(BinTree* BT);
-BinTreeNode* addLCNode(BinTree* BT,char data);              // LC = left child
-BinTreeNode* addRCdNode(BinTree* BT,char data);             // RC = right child
-BinTreeNode* getLCNode(BinTree* BT);
-BinTreeNode* getRCNode(BinTree* BT);
-char getData(BinTree* BT);
-void deleteBinTree(BinTree* BT);
+BinTree* makeBinTree(char root_data);                            // malloc
+BinTreeNode* getRootNode(BinTree* pBinTree);
+BinTreeNode* makeBinTreeNode(char data);
+BinTreeNode* addLCNode(BinTreeNode* pNode,char data);              // LC = left child
+BinTreeNode* addRCdNode(BinTreeNode* pNode,char data);             // RC = right child
+BinTreeNode* getLCNode(BinTreeNode* pNode);
+BinTreeNode* getRCNode(BinTreeNode* pNode);
+char getData(BinTreeNode* pNode);
+void delBinTreeNode(BinTreeNode* pNode);
+void delBinTree(BinTree* pBinTree);
 
 #endif
