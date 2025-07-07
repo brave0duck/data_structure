@@ -1,31 +1,66 @@
 /*******************************************************************
- * Linked binary Tree implementation
- * 
- *                    [BinTree]
- *                       |
- *                    [root]
- *                       |
- *  [left pointer] - [data]- [right pointer]
- *   
- * <ADT> - create, add(left, right) , get, delete
+ * Linked binary Tree traversal
  * 
  *******************************************************************/
-#include "linked_binary_tree.h"
+#include "traversal.h"
 
-// create binary tree. [BinTree] -> [root node] -> [left child], [right child] .....
+int main(void){
+    BinTree* pBinTree = NULL;
+
+    BinTreeNode* pNodeA=NULL;
+    BinTreeNode* pNodeB=NULL;
+    BinTreeNode* pNodeC=NULL;
+    BinTreeNode* pNodeD=NULL;
+    BinTreeNode* pNodeE=NULL;
+    BinTreeNode* pNodeF=NULL;
+    BinTreeNode* pNodeG=NULL;
+
+    pBinTree = makeBinTree('A');
+    if(pBinTree){
+        pNodeA = getRootNode(pBinTree);
+        pNodeB = addLCNode(pNodeA,'B');
+        pNodeC = addRCNode(pNodeA,'C');
+        if(pNodeB){
+            pNodeD = addLCNode(pNodeB,'D');
+            pNodeE = addRCNode(pNodeB,'E');
+        }
+        if(pNodeC){
+            pNodeF = addLCNode(pNodeC,'F');
+            pNodeG = addRCNode(pNodeC,'G');
+        }
+    }
+    
+    traversalTree(pBinTree->pRootNode);
+    delBinTree(pBinTree);
+
+    return 0;
+}
+void traversalTree(BinTreeNode* pNode){
+
+    // 1. pre-order traversal
+    
+    if(pNode){
+        printf("%c\n",getData(pNode));      // now node
+        traversalTree(pNode->pLeftChild);   // left
+        traversalTree(pNode->pRrightChild); // right
+    }
+
+
+}
+// create binary tree. [BinTree] -> [root node] -> [left child] [data] [right child] .....
 BinTree* makeBinTree(char root_data){
     BinTree* pBinTree = (BinTree*)calloc(1,sizeof(BinTree));
     if(pBinTree){
         pBinTree->pRootNode = makeBinTreeNode(root_data);
         if(pBinTree->pRootNode == NULL){
-            free(pBinTree);
-            pBinTree=NULL;
-            perror("memory allocation error. makeBinTreeNode()");
+            free(pBinTree->pRootNode);
+            perror("memory allocation error. mkeBinTreeNode()");
         }
     }
     else{
-        perror("memory allocation error. makeBinTree()");
+        perror("memory allocation error.makeBinTree()");
     }
+
     return pBinTree;
 }
 // get root node
