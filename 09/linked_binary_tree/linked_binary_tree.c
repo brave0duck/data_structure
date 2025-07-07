@@ -1,3 +1,15 @@
+/*******************************************************************
+ * Linked binary Tree implementation
+ * 
+ *                    [BinTree]
+ *                       |
+ *                    [root]
+ *                       |
+ *  [left pointer] - [data]- [right pointer]
+ *   
+ * <ADT> - create, add(left, right) , get, delete
+ * 
+ *******************************************************************/
 #include "linked_binary_tree.h"
 
 // create binary tree. [BinTree] -> [root node] -> [left child], [right child] .....

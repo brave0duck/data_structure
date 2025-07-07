@@ -7,7 +7,6 @@
  *                       |
  *  [left pointer] - [data]- [right pointer]
  *   
- * <ADT> - create, add(left, right) , get, delete
  * 
  *******************************************************************/
 #ifndef _LINKED_BINARY_TREE_
