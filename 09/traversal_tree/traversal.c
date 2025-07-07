@@ -30,22 +30,42 @@ int main(void){
         }
     }
     
-    traversalTree(pBinTree->pRootNode);
+    printf("Data input complete...\n");
+    
+    preOrder(pBinTree->pRootNode);
+    printf("pre-order traversal\n");
+
+    inOrder(pBinTree->pRootNode);
+    printf("in-order traversal\n");
+    
+    postOrder(pBinTree->pRootNode);
+    printf("post-order traversal\n");
+    
+    puts("");
     delBinTree(pBinTree);
 
     return 0;
 }
-void traversalTree(BinTreeNode* pNode){
-
-    // 1. pre-order traversal
-    
+void preOrder(BinTreeNode* pNode){
     if(pNode){
-        printf("%c\n",getData(pNode));      // now node
-        traversalTree(pNode->pLeftChild);   // left
-        traversalTree(pNode->pRrightChild); // right
+        printf("%c  ",getData(pNode));      // now node
+        preOrder(pNode->pLeftChild);   // left
+        preOrder(pNode->pRrightChild); // right
     }
-
-
+}
+void inOrder(BinTreeNode* pNode){
+    if(pNode){
+        inOrder(pNode->pLeftChild);   // left
+        printf("%c  ",getData(pNode));      // now node
+        inOrder(pNode->pRrightChild); // right
+    }
+}
+void postOrder(BinTreeNode* pNode){
+    if(pNode){
+        postOrder(pNode->pLeftChild);   // left
+        postOrder(pNode->pRrightChild); // right
+        printf("%c  ",getData(pNode));      // now node
+    }
 }
 // create binary tree. [BinTree] -> [root node] -> [left child] [data] [right child] .....
 BinTree* makeBinTree(char root_data){

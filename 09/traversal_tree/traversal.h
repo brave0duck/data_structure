@@ -36,6 +36,11 @@ char getData(BinTreeNode* pNode);
 void delBinTreeNode(BinTreeNode* pNode);
 void delBinTree(BinTree* pBinTree);
 
-void traversalTree(BinTreeNode* pNode);
+// tree traversal method  - pre-order, in-order, post-order
+// V - now node , L - left, R - right
+
+void preOrder(BinTreeNode* pNode);          // pre-order = VLR
+void inOrder(BinTreeNode* pNode);           // in-order = LVR
+void postOrder(BinTreeNode* pNode);         // post-order = LRV
 
 #endif
