@@ -26,31 +26,31 @@ BinTreeNode* makeBinTreeNode(char data){
 }
 // get left child node
 BinTreeNode* getLCNode(BinTreeNode* pNode){
-    return (pNode ? pNode->pLeftChild : NULL);
+    return pNode!=NULL ? pNode->pLeftChild : NULL;
 }
 // get right child node
 BinTreeNode* getRCNode(BinTreeNode* pNode){
-    return (pNode ? pNode->pRrightChild : NULL);
+    return pNode!= NULL ? pNode->pRrightChild : NULL;
 }
 // add left child node
 BinTreeNode* addLCNode(BinTreeNode* pNode,char data){
-    BinTreeNode * pNode = makeBinTreeNode(data);
+    BinTreeNode* pChild = makeBinTreeNode(data);
     if(pNode){
-        pNode->pLeftChild = pNode;
+        pNode->pLeftChild = pChild;
     }
-    return pNode;
+    return pChild;
 }
 // add right child node
-BinTreeNode* addRCdNode(BinTreeNode* pNode,char data){
-    BinTreeNode * pNode = makeBinTreeNode(data);
+BinTreeNode* addRCNode(BinTreeNode* pNode,char data){
+    BinTreeNode* pChild = makeBinTreeNode(data);
     if(pNode){
-        pNode->pRrightChild = pNode;
+        pNode->pRrightChild = pChild;
     }
-    return pNode;
+    return pChild;
 }
 // get data
 char getData(BinTreeNode* pBinTreeNode){
-    return (pBinTreeNode? pBinTreeNode->data : NULL);
+    return pBinTreeNode != NULL ? pBinTreeNode->data: '\0';
 }
 // recursive delete node. delete all binary tree node
 void delBinTreeNode(BinTreeNode* pNode){
@@ -61,7 +61,7 @@ void delBinTreeNode(BinTreeNode* pNode){
     }
 }
 // delete whole Tree. and delete BinTree itself
-void deleteBinTree(BinTree* pBinTree){
+void delBinTree(BinTree* pBinTree){
     if(pBinTree){
         delBinTreeNode(pBinTree->pRootNode);
         free(pBinTree);

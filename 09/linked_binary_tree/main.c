@@ -1,7 +1,7 @@
 #include "linked_binary_tree.h"
 
 int main(void){
-    BinTree *pBinTree = NULL;
+    BinTree* pBinTree = NULL;
 
     BinTreeNode* pNodeA=NULL;
     BinTreeNode* pNodeB=NULL;
@@ -23,6 +23,7 @@ int main(void){
             pNodeF = addRCNode(pNodeC,'F');
         }
     }
+    
     delBinTree(pBinTree);
 
     return 0;

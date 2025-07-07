@@ -14,6 +14,7 @@
 #define _LINKED_BINARY_TREE_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct BinTreeNodeType{
     char data;
@@ -29,7 +30,7 @@ BinTree* makeBinTree(char root_data);                            // malloc
 BinTreeNode* getRootNode(BinTree* pBinTree);
 BinTreeNode* makeBinTreeNode(char data);
 BinTreeNode* addLCNode(BinTreeNode* pNode,char data);              // LC = left child
-BinTreeNode* addRCdNode(BinTreeNode* pNode,char data);             // RC = right child
+BinTreeNode* addRCNode(BinTreeNode* pNode,char data);             // RC = right child
 BinTreeNode* getLCNode(BinTreeNode* pNode);
 BinTreeNode* getRCNode(BinTreeNode* pNode);
 char getData(BinTreeNode* pNode);
