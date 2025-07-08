@@ -3,5 +3,6 @@
         "linked_stack.h": "c",
         "stdlib.h": "c",
         "string.h": "c"
-    }
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }
