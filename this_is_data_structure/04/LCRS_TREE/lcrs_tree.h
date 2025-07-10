@@ -20,6 +20,6 @@ void PrintTree(lcrs_node* pNode, int level);  // level 0 = all node
 int CountChild(lcrs_node* pNode);
 int CountSlibing(lcrs_node* pNode);
 lcrs_node* FindNode(lcrs_node* pNode, DATA data);
-
+lcrs_node* FindNodeEX(lcrs_node* pNode, DATA data);
 
 #endif
