@@ -3,19 +3,62 @@
 #include "lcrs_tree.h"
 
 int main(int argc, char** argv){
-  lcrs_node* pHead = CreateLCRS();
 
+  lcrs_node* Root = CreateNode('A');
+  lcrs_node* B = CreateNode('B');
+  lcrs_node* C = CreateNode('C');
+  lcrs_node* D = CreateNode('D');
+  lcrs_node* E = CreateNode('E');
+  lcrs_node* F = CreateNode('F');
+  lcrs_node* G = CreateNode('G');
+  lcrs_node* H = CreateNode('H');
+  lcrs_node* I = CreateNode('I');
+  lcrs_node* J = CreateNode('J');
+  lcrs_node* K = CreateNode('K');
 
-  free(pHead);
+  AddChild(Root,B);
+    AddChild(B,C);
+    AddChild(B,D);
+      AddChild(D,E);
+      AddChild(D,F);
+
+  AddChild(Root,G);
+    AddChild(G,H);
+  
+  AddChild(Root,I);
+    AddChild(I,J);
+      AddChild(J,K);
+
+  PrintLCRS(Root);
+
+  FindNode(Root,'F');
+  FindExNode(Root,'F');
+
+  DestroyLCRS(Root);
 
   return 0;
 }
-lcrs_node* CreateLCRS(){
-  lcrs_node* pTreeNode = (lcrs_node*)malloc(sizeof(lcrs_node));
-  if(pTreeNode == NULL)
-    perror("lsrs tree생성에 실패했습니다.");
-
-  return pTreeNode;
+void AddChild(lcrs_node* pNode, lcrs_node* pNew){
+  if(pNode->pLC == NULL){     // if not child
+    pNode->pLC = pNew;
+  }
+  else{
+    lcrs_node* pFind = &pNode->pLC;
+    while(pFind->pRS != NULL){
+      pFind = pFind->pRS;
+    }
+    pFind->pRS = pNew;
+  }
+}
+lcrs_node* CreateNode(DATA data){
+  lcrs_node* pNew = (lcrs_node*)malloc(sizeof(lcrs_node));
+  if(pNew){
+    pNew->data = data;
+    pNew->pLC=NULL;
+    pNew->pRS=NULL;
+  }
+  return pNew;
+  
 }
 // recursive delete
 int DestroyLCRS(lcrs_node * pNode){
@@ -31,93 +74,90 @@ int DestroyLCRS(lcrs_node * pNode){
     }
   }
 }
-int AddChild(lcrs_node* pNode, lcrs_node* pNew){
-  if(pNode != NULL && pNew != NULL){
-    pNode->pLC = pNew;
-    pNew->pLC=NULL;
-    pNew->pRS = NULL;
-
-    return 0;   // success
-  }
-  return 1;     // fail
-
-}
 lcrs_node* FindNode(lcrs_node* pNode, DATA data){
+
+  lcrs_node* pSlibing;  lcrs_node* pChild;
+  pSlibing = pChild = pNode;
+  int xpos=1;
+  int ypos=1;
+
+  while(pChild != NULL){
+    while(pSlibing != NULL){
+      if(pSlibing->data == data){
+        printf("Find DATA...%d level, %d th node",ypos,xpos);
+        return pSlibing;
+      }
+      pSlibing = pSlibing->pRS;
+      xpos++;
+    }
+    pChild = pChild->pLC;
+    pSlibing = pChild;
+    ypos++;
+  }
+  return NULL;
+}
+// find the previous node of the deleted node.
+lcrs_node* FindExNode(lcrs_node* pHead, DATA data){
+  // pSlibing = moving ▶▶▶▶▶
+  // pChild = moving ▼ ▼ ▼ ▼ ▼
+  lcrs_node* pSlibing;  lcrs_node* pChild;
+  pSlibing = pChild = pHead;
+  
+  if(pChild->data == data)
+    return pHead;
+  // The goal is to find the previous node of the deleted node.
+  
+  while(pChild != NULL){
+    if(pChild->pLC != NULL){
+      if(pChild->pLC->data == data)
+        return pChild;
+    }
+    while(pSlibing != NULL){
+      
+      if(pSlibing->pRS != NULL){
+        if(pSlibing->pRS->data == data){
+          return pSlibing;
+        }
+      }
+      pSlibing = pSlibing->pRS;
+    }
+    pChild = pSlibing = pChild->pLC;
+  }
+  return NULL;
+}
+//
+int PrintLCRS(lcrs_node* pNode){  // level 0 = all node
+  
   lcrs_node* pSlibing;  lcrs_node* pChild;
   pSlibing = pChild = pNode;
 
   while(pChild != NULL){
     while(pSlibing != NULL){
-      if(pSlibing->data == data){
-        return pSlibing;
-      }
+      printf("%c ",pSlibing->data);
       pSlibing = pSlibing->pRS;
     }
+    printf("\n|");
+    printf("\n|+--");
     pChild = pChild->pLC;
     pSlibing = pChild;
   }
-  return NULL:
+    
 }
-//recursive version
-lcrs_node* FindNodeEX(lcrs_node* pNode, DATA data){
-
-  // lcrs_node* pSlibing;  lcrs_node* pChild;
-  // pSlibing = pChild = pNode;
-
-  // while(pChild != NULL){
-  //   while(pSlibing != NULL){
-  //     if(pSlibing->data == data){
-  //       return pSlibing;
-  //     }
-  //     pSlibing = pSlibing->pRS;
-  //   }
-  //   pChild = pChild->pLC;
-  //   pSlibing = pChild;
-  // }
-  // return NULL:
-
-  lcrs_node* pX;  lcrs_node* pY;
-  pX = pY = pNode;
-
-  if(pX->data == data)
-    return pX;
-
-  while(pY != NULL){
-    while(pX != NULL){
-      
-    }
+int CountChild(lcrs_node* pNode){
+  lcrs_node* pTemp = pNode;
+  int count=0;
+  while(pTemp != NULL){
+    count++;
+    pTemp = pTemp->pLC;
   }
-   && pY->pLC != NULL){
-    while(pX != NULL && pX->pRS != NULL){
-      if(pX->pRS->data == data){
-        return pX;
-      }
-      pX = pX->pRS;
-    }
-    pY = pY->pLC;
-    pX = pY;
+  return count;
+}
+int CountSlibing(lcrs_node* pNode){
+  lcrs_node* pTemp = pNode;
+  int count=0;
+  while(pTemp != NULL){
+    count++;
+    pTemp = pTemp->pRS;
   }
-  return pX->data == data ? pX : NULL;
-
+  return count;
 }
-// 
-int DeleteNode(lcrs_node* pNode, DATA del){
-  if(pNode != NULL){
-    lcrs_node* pDel = FinldNode(pNode,del);
-    // find prev node
-    // pointer link
-}
-void PrintTree(lcrs_node* pNode, int level){  // level 0 = all node
-  if(pNode != NULL){
-    switch(level){
-      case 0:     // whole print
-
-    }
-  }
-  if(le)
-
-  printf("")
-
-}
-int CountChild(lcrs_node* pNode);
-int CountSlibing(lcrs_node* pNode);

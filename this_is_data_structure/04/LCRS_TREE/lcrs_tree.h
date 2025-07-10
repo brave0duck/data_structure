@@ -1,5 +1,5 @@
-#ifndef TREE_LCRS_H
-#define TREE_LCRS_H
+#ifndef TREE_LCRS
+#define TREE_LCRS
 
 typedef char DATA;
 
@@ -11,15 +11,13 @@ typedef struct a{
 
 // ADT - CREATE_LCRS, DESTROY_LCRS, ADD_NODE, DELETE_NODE, PRINT_TREE, COUNT_CHILD, COUNT_SLIBING
 
-lcrs_node* CreateLCRS();
+lcrs_node* CreateNode(DATA data);
 int DestroyLCRS(lcrs_node * pNode); 
-int AddChild(lcrs_node* pNode, lcrs_node* pNew);
-int AddSlibing(lcrs_node* pNode, lcrs_node* pNew);
-int DeleteNode(lcrs_node* pNode)
-void PrintTree(lcrs_node* pNode, int level);  // level 0 = all node
+void AddChild(lcrs_node* pNode, lcrs_node* pNew);
+int PrintLCRS(lcrs_node* pNode);  
 int CountChild(lcrs_node* pNode);
 int CountSlibing(lcrs_node* pNode);
 lcrs_node* FindNode(lcrs_node* pNode, DATA data);
-lcrs_node* FindNodeEX(lcrs_node* pNode, DATA data);
+lcrs_node* FindExNode(lcrs_node* pHead, DATA data);
 
 #endif
