@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include "lcrs_tree.h"
 
-static int CHILD_COUNT; // node count 
-static int LEVEL_COUNT;
+static int CHILD_COUNT;   //for counting child node
 
 int main(int argc, char** argv){
 
