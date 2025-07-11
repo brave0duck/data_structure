@@ -1,0 +1,14 @@
+==81245== Memcheck, a memory error detector
+==81245== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==81245== Using Valgrind-3.25.1 and LibVEX; rerun with -h for copyright info
+==81245== Command: ./lcrs_tree
+==81245== Parent PID: 61947
+==81245== 
+==81245== 
+==81245== HEAP SUMMARY:
+==81245==     in use at exit: 0 bytes in 0 blocks
+==81245==   total heap usage: 12 allocs, 12 frees, 1,288 bytes allocated
+==81245== 
+==81245== All heap blocks were freed -- no leaks are possible
+==81245== 
+==81245== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

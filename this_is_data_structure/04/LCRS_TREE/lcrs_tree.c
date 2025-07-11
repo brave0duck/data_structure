@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "lcrs_tree.h"
 
+static int CHILD_COUNT; // node count 
+
 int main(int argc, char** argv){
 
   lcrs_node* Root = CreateNode('A');
@@ -29,12 +31,13 @@ int main(int argc, char** argv){
     AddChild(I,J);
       AddChild(J,K);
 
-  PrintLCRS(Root);
+  PrintTree(Root,0);
 
-  FindNode(Root,'F');
-  FindExNode(Root,'F');
+  FindNode(Root,'B');
+  
+  printf("Tree Node Count : %d\n", CountChild(Root));
 
-  DestroyLCRS(Root);
+  DestroyTree(Root);
 
   return 0;
 }
@@ -43,13 +46,14 @@ void AddChild(lcrs_node* pNode, lcrs_node* pNew){
     pNode->pLC = pNew;
   }
   else{
-    lcrs_node* pFind = &pNode->pLC;
+    lcrs_node* pFind = pNode->pLC;
     while(pFind->pRS != NULL){
       pFind = pFind->pRS;
     }
     pFind->pRS = pNew;
   }
 }
+
 lcrs_node* CreateNode(DATA data){
   lcrs_node* pNew = (lcrs_node*)malloc(sizeof(lcrs_node));
   if(pNew){
@@ -60,104 +64,59 @@ lcrs_node* CreateNode(DATA data){
   return pNew;
   
 }
-// recursive delete
-int DestroyLCRS(lcrs_node * pNode){
-
+void DestroyNode(lcrs_node* pNode){
   if(pNode != NULL){
-    if(pNode->pLC == NULL && pNode->pRS == NULL){
-      printf("%c delete\n", pNode->data);
-      free(pNode);
-    }
-    else{
-        DestroyLCRS(pNode->pRS);
-        DestroyLCRS(pNode->pLC);
-    }
+    free(pNode);
   }
 }
-lcrs_node* FindNode(lcrs_node* pNode, DATA data){
+// recursive delete
+int DestroyTree(lcrs_node * pRoot){
 
-  lcrs_node* pSlibing;  lcrs_node* pChild;
-  pSlibing = pChild = pNode;
-  int xpos=1;
-  int ypos=1;
-
-  while(pChild != NULL){
-    while(pSlibing != NULL){
-      if(pSlibing->data == data){
-        printf("Find DATA...%d level, %d th node",ypos,xpos);
-        return pSlibing;
-      }
-      pSlibing = pSlibing->pRS;
-      xpos++;
-    }
-    pChild = pChild->pLC;
-    pSlibing = pChild;
-    ypos++;
-  }
-  return NULL;
+  if(pRoot->pRS != NULL)
+    DestroyTree(pRoot->pRS);
+  if(pRoot->pLC != NULL)
+    DestroyTree(pRoot->pLC);
+  
+  pRoot->pLC = NULL;
+  pRoot->pRS = NULL;
+  free(pRoot);
 }
-// find the previous node of the deleted node.
-lcrs_node* FindExNode(lcrs_node* pHead, DATA data){
-  // pSlibing = moving ▶▶▶▶▶
-  // pChild = moving ▼ ▼ ▼ ▼ ▼
-  lcrs_node* pSlibing;  lcrs_node* pChild;
-  pSlibing = pChild = pHead;
-  
-  if(pChild->data == data)
-    return pHead;
-  // The goal is to find the previous node of the deleted node.
-  
-  while(pChild != NULL){
-    if(pChild->pLC != NULL){
-      if(pChild->pLC->data == data)
-        return pChild;
-    }
-    while(pSlibing != NULL){
-      
-      if(pSlibing->pRS != NULL){
-        if(pSlibing->pRS->data == data){
-          return pSlibing;
-        }
-      }
-      pSlibing = pSlibing->pRS;
-    }
-    pChild = pSlibing = pChild->pLC;
-  }
-  return NULL;
-}
-//
-int PrintLCRS(lcrs_node* pNode){  // level 0 = all node
-  
-  lcrs_node* pSlibing;  lcrs_node* pChild;
-  pSlibing = pChild = pNode;
 
-  while(pChild != NULL){
-    while(pSlibing != NULL){
-      printf("%c ",pSlibing->data);
-      pSlibing = pSlibing->pRS;
-    }
-    printf("\n|");
-    printf("\n|+--");
-    pChild = pChild->pLC;
-    pSlibing = pChild;
+void FindNode(lcrs_node* pNode, DATA data){
+
+  if(pNode->data == data){
+    printf("\nFind !!! %c\n", data);
   }
-    
+  if(pNode->pRS != NULL)
+    FindNode(pNode->pRS,data);
+
+  if(pNode->pLC != NULL)
+    FindNode(pNode->pLC,data);
+  
+  
+}
+int PrintTree(lcrs_node* pNode,int Depth){
+  
+  for(int i=0; i<Depth-1; i++)
+    printf("   ");
+  if(Depth>0)
+    printf("+--");
+  
+  printf("%c\n",pNode->data);
+  
+  if(pNode->pLC != NULL)
+    PrintTree(pNode->pLC, Depth+1);
+
+  if(pNode->pRS != NULL)
+    PrintTree(pNode->pRS,Depth);
+
 }
 int CountChild(lcrs_node* pNode){
-  lcrs_node* pTemp = pNode;
-  int count=0;
-  while(pTemp != NULL){
-    count++;
-    pTemp = pTemp->pLC;
+  if(pNode != NULL){
+    CHILD_COUNT++;    //extern int
+    CountChild(pNode->pRS);
+    CountChild(pNode->pLC);
+    return CHILD_COUNT;
   }
-  return count;
-}
-int CountSlibing(lcrs_node* pNode){
-  lcrs_node* pTemp = pNode;
-  int count=0;
-  while(pTemp != NULL){
-    count++;
-    pTemp = pTemp->pRS;
-  }
-  return count;
+  return 0;
 }
