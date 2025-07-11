@@ -3,6 +3,7 @@
 #include "lcrs_tree.h"
 
 static int CHILD_COUNT; // node count 
+static int LEVEL_COUNT;
 
 int main(int argc, char** argv){
 
@@ -37,6 +38,24 @@ int main(int argc, char** argv){
   
   printf("Tree Node Count : %d\n", CountChild(Root));
 
+  printf("%d level node = ",0);
+  LCRS_PrintNodesAtLevel(Root,0,0);
+  printf("\n");
+  printf("%d level node = ",1);
+  LCRS_PrintNodesAtLevel(Root,1,0);
+  printf("\n");
+  printf("%d level node = ",2);
+  LCRS_PrintNodesAtLevel(Root,2,0);
+  printf("\n");
+
+  printf("%d level node = ",3);
+  LCRS_PrintNodesAtLevel(Root,3,0);
+  printf("\n");
+  
+  printf("%d level node = ",7);
+  LCRS_PrintNodesAtLevel(Root,7,0);
+  printf("\n");
+  
   DestroyTree(Root);
 
   return 0;
@@ -119,4 +138,16 @@ int CountChild(lcrs_node* pNode){
     return CHILD_COUNT;
   }
   return 0;
+}
+void LCRS_PrintNodesAtLevel(lcrs_node* pNode,int targetLevel, int currentLevel){
+  
+  if(targetLevel == currentLevel)
+    printf("%c ",pNode->data);
+  
+  if(pNode->pLC != NULL)
+    LCRS_PrintNodesAtLevel(pNode->pLC, targetLevel, currentLevel+1);
+    
+  if(pNode->pRS != NULL)
+    LCRS_PrintNodesAtLevel(pNode->pRS,targetLevel, currentLevel);
+
 }

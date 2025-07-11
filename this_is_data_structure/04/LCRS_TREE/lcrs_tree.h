@@ -17,9 +17,9 @@ int DestroyTree(lcrs_node * pRoot);
 void AddChild(lcrs_node* pNode, lcrs_node* pNew);
 int PrintTree(lcrs_node* pNode, int Depth);  
 int CountChild(lcrs_node* pNode);
-int CountSlibing(lcrs_node* pNode);
 void FindNode(lcrs_node* pNode, DATA data);
-lcrs_node* FindExNode(lcrs_node* pHead, DATA data);
+
+void LCRS_PrintNodesAtLevel(lcrs_node* pNode,int targetLevel, int currentLevel);
 
 
 
