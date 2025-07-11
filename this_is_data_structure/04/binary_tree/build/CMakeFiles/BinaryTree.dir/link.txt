@@ -1,0 +1,1 @@
+/bin/cc -g -Wl,--dependency-file=CMakeFiles/BinaryTree.dir/link.d CMakeFiles/BinaryTree.dir/main.c.o -o BinaryTree
