@@ -1,6 +1,9 @@
 #ifndef BINARY_TREE
 #define BINARY_TREE
 
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef char ElementType;
 
 typedef struct sb{

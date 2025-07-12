@@ -1,5 +1,5 @@
-/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/BinaryTree.dir
-/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/package.dir
-/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/package_source.dir
-/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/edit_cache.dir
-/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/rebuild_cache.dir
+/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/BinaryTree.dir
+/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/package.dir
+/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/package_source.dir
+/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/edit_cache.dir
+/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build/CMakeFiles/rebuild_cache.dir

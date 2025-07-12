@@ -1,8 +1,14 @@
 [
 {
-  "directory": "/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/build",
-  "command": "/bin/cc   -g -o CMakeFiles/BinaryTree.dir/main.c.o -c /home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/main.c",
-  "file": "/home/deep-purple/work/data_structure/this_is_data_structure/04/binary_tree/main.c",
+  "directory": "/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/BinaryTree.dir/BinaryTree.c.o -c /home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/BinaryTree.c",
+  "file": "/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/BinaryTree.c",
+  "output": "CMakeFiles/BinaryTree.dir/BinaryTree.c.o"
+},
+{
+  "directory": "/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/BinaryTree.dir/main.c.o -c /home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/main.c",
+  "file": "/home/speedking/workspace/data_structure/this_is_data_structure/04/binary_tree/main.c",
   "output": "CMakeFiles/BinaryTree.dir/main.c.o"
 }
 ]
