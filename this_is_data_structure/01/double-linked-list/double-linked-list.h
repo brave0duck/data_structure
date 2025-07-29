@@ -18,7 +18,7 @@ void AppendNode(Dll_Node** ppHead, Dll_Node* pNew);
 Dll_Node* getNode(Dll_Node** ppHead, ElementType data);
 void DeleteNode(Dll_Node** ppHead, Dll_Node* pDel);
 void InsertNode(Dll_Node** ppHead, Dll_Node* pNew);
-int CountNode(Dll_Node* ppHead);
+int CountNode(Dll_Node** ppHead);
 
 // useful func
 int IsEmptyList(Dll_Node ** ppHead);

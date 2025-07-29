@@ -74,7 +74,7 @@ Dll_Node* getNode(Dll_Node** ppHead,ElementType data){
     }
     return NULL;
 }
-void DeleteNode(Dll_Node* pHead, Dll_Node* pDel){
+void DeleteNode(Dll_Node** pHead, Dll_Node* pDel){
 
 
 }
